@@ -2,6 +2,9 @@ Changelog for plone.app.customerize
 
     (name of developer listed in brackets)
 
+    - Initial version
+      [witsch]
+
     - Initial package structure.
       [witsch]
 
