@@ -1,0 +1,7 @@
+Changelog for plone.app.customerize
+
+    (name of developer listed in brackets)
+
+    - Initial package structure.
+      [witsch]
+
