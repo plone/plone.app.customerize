@@ -1,7 +1,6 @@
 from Products.Five.browser import BrowserView
 from five.customerize.browser import mangleAbsoluteFilename
 from zope.publisher.interfaces.browser import IBrowserRequest
-from zope.app.apidoc.presentation import getViews
 from zope.component import getGlobalSiteManager
 
 
