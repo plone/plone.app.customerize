@@ -1,0 +1,21 @@
+<h1 tal:replace="structure context/manage_page_header" />
+<h1 tal:replace="structure context/manage_tabs" />
+
+<table cellspacing="0" cellpadding="2" border="0">
+  <tr class="list-header">
+    <td><div class="form-label">For</div></td>
+    <td><div class="form-label">Request Type</div></td>
+    <td><div class="form-label">Name</div></td>
+  </tr>
+
+  <tr tal:repeat="reg view/templateViewRegistrationInfos">
+    <td><div class="list-item"
+             tal:content="reg/for">for</div></td>
+    <td><div class="list-item"
+             tal:content="reg/type">type</div></td>
+    <td><div class="list-item"
+             tal:content="reg/viewname">...</div></td>
+  </tr>
+</table>
+
+<h1 tal:replace="structure context/manage_page_footer" />

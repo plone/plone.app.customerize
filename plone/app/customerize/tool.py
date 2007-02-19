@@ -12,6 +12,10 @@ class ViewTemplateContainer(Folder):
     title = 'Manages view customizations'
     meta_type = 'Plone View Customizations'
 
+    manage_options = (
+        dict(label='Registrations', action='registrations.html'),
+        ) + Folder.manage_options
+
     def addTemplate(self, id, template):
         """ add the given ttw view template to the container """
         self._setObject(id, template)

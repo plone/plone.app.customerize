@@ -1,5 +1,6 @@
 <configure
-    xmlns="http://namespaces.zope.org/zope" 
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     i18n_domain="plone">
     
@@ -9,5 +10,12 @@
       directory="profile"
       description="Extension profile for default plone.app.customerize setup."
       provides="Products.GenericSetup.interfaces.EXTENSION" />
+
+  <browser:page
+      name="registrations.html"
+      template="registrations.pt"
+      for=".tool.ViewTemplateContainer"
+      class=".browser.RegistrationsView"
+      permission="five.ManageSite" />
 
 </configure>
