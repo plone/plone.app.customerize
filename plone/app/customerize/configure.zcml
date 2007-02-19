@@ -11,11 +11,19 @@
       description="Extension profile for default plone.app.customerize setup."
       provides="Products.GenericSetup.interfaces.EXTENSION" />
 
-  <browser:page
-      name="registrations.html"
-      template="registrations.pt"
-      for=".tool.ViewTemplateContainer"
+  <browser:pages
+      for="five.customerize.interfaces.IViewTemplateContainer"
       class=".browser.RegistrationsView"
-      permission="five.ManageSite" />
+      permission="five.ManageSite">
+    <browser:page
+        name="registrations.html"
+        template="registrations.pt" />
+    <browser:page
+        name="customizezpt.html"
+        template="customize.pt" />
+    <browser:page
+        name="customizezpt"
+        attribute="customizeTemplate" />
+  </browser:pages>
 
 </configure>

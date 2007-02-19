@@ -1,0 +1,28 @@
+<h1 tal:replace="structure context/manage_page_header" />
+<h1 tal:replace="structure context/manage_tabs" />
+
+<div>
+
+  <p i18n:translate="">This is the source of the
+  <code tal:content="request/form/view_name">viewname</code>:</p>
+
+  <pre style="background-color: #cccccc; border: 1px solid black; padding: 5px;"
+       tal:define="reg view/getRegistrationFromRequest"
+       tal:content="python: view.getTemplateCodeFromRegistration(reg)">
+    template source
+  </pre>
+
+  <form action="@@customizezpt" method="post"
+        enctype="multipart/form-data">
+    <input type="hidden" name="for_name" value="theviewname"
+           tal:attributes="value request/form/for_name" />
+    <input type="hidden" name="type_name" value="theviewname"
+           tal:attributes="value request/form/type_name" />
+    <input type="hidden" name="view_name" value="theviewname"
+           tal:attributes="value request/form/view_name" />
+    <input type="submit" name="" value="Customize" />
+  </form>
+
+</div>
+
+<h1 tal:replace="structure context/manage_page_footer" />
