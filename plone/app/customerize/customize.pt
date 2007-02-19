@@ -7,8 +7,7 @@
   <code tal:content="request/form/view_name">viewname</code>:</p>
 
   <pre style="background-color: #cccccc; border: 1px solid black; padding: 5px;"
-       tal:define="reg view/getRegistrationFromRequest"
-       tal:content="python: view.getTemplateCodeFromRegistration(reg)">
+       tal:content="view/getTemplateCodeFromRegistration">
     template source
   </pre>
 

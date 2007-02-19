@@ -22,7 +22,7 @@
 </div>
 
 <dl>
-  <tal:iface repeat="iface view/templateViewRegistrationGroups">
+  <tal:iface repeat="iface view/getTemplateViewRegistrations">
     <dt tal:content="iface/name" />
     <dd>
       <tal:reg repeat="info iface/views">
