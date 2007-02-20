@@ -2,6 +2,9 @@ Changelog for plone.app.customerize
 
     (name of developer listed in brackets)
 
+    - ZMI views for customizing views, refactoring & cleanups
+      [witsch]
+      
     - Initial version
       [witsch]
 
