@@ -1,14 +1,28 @@
 from Products.Five.browser import BrowserView
+from zope.publisher.interfaces.browser import IBrowserRequest
 from zope.component import getSiteManager
 from os.path import sep
 
 from plone.app.customerize import registration
+from five.customerize.interfaces import ITTWViewTemplate
 
 
 class RegistrationsView(BrowserView):
 
     def getTemplateViewRegistrations(self):
-        return registration.templateViewRegistrationGroups()
+        """ get all global view registrations and cycle through the local
+            ones to see which views have already been customized ttw """
+        regs = []
+        local = {}
+        for reg in self.getLocalRegistrations():
+            local[(reg.required[0], str(reg.name))] = reg
+        for reg in registration.templateViewRegistrations():
+            lreg = local.get((reg.required[0], str(reg.name)), None)
+            if lreg is not None:
+                regs.append(lreg)
+            else:
+                regs.append(reg)
+        return registration.templateViewRegistrationGroups(regs)  
 
     def getTemplateCodeFromRegistration(self):
         reg = self.getRegistrationFromRequest()
@@ -34,4 +48,12 @@ class RegistrationsView(BrowserView):
         self.registerTTWView(viewzpt, reg)
         url = sep.join(viewzpt.getPhysicalPath()) + "/manage_workspace"
         self.request.response.redirect(url)
+
+    def getLocalRegistrations(self):
+        components = getSiteManager(self.context)
+        for reg in components.registeredAdapters():
+            if (len(reg.required) == 2 and
+                    reg.required[1].isOrExtends(IBrowserRequest) and
+                    ITTWViewTemplate.providedBy(reg.factory)):
+                yield reg
 

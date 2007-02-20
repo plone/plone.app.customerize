@@ -1,7 +1,6 @@
 bugs:
-  - make sure the link in the registrations overview is still
-    clickable after customization
   - write a browsertest doing the roundtrip
+  - fix url after customizing a template
   - backport changes to five.customerize
 
 five.customerize:

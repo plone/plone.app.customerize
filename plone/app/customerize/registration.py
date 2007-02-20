@@ -1,5 +1,5 @@
 from Products.Five.browser import BrowserView
-from five.customerize.interfaces import IViewTemplateContainer
+from five.customerize.interfaces import IViewTemplateContainer, ITTWViewTemplate
 from five.customerize.browser import mangleAbsoluteFilename
 from five.customerize.zpt import TTWViewTemplate
 from zope.publisher.interfaces.browser import IBrowserRequest
@@ -36,17 +36,25 @@ def templateViewRegistrationInfos(regs):
     def regkey(reg):
         return reg.name
     for reg in sorted(regs, key=regkey):
+        if ITTWViewTemplate.providedBy(reg.factory):
+            zptfile = None
+            zcmlfile = None
+            customized = reg.factory.getId()    # TODO: can we get an absolute url?
+        else:
+            zptfile = mangleAbsoluteFilename(reg.factory.index.filename)
+            zcmlfile = mangleAbsoluteFilename(reg.info.file)
+            customized = None
         yield {
             'viewname': reg.name,
             'for': interfaceName(reg.required[0]),
             'type': interfaceName(reg.required[1]),
-            'zptfile': mangleAbsoluteFilename(reg.factory.index.filename),
-            'zcmlfile': mangleAbsoluteFilename(reg.info.file)
+            'zptfile': zptfile,
+            'zcmlfile': zcmlfile,
+            'customized': customized,
         }
 
-def templateViewRegistrationGroups():
+def templateViewRegistrationGroups(regs):
     ifaces = {}
-    regs = templateViewRegistrations()
     for reg in templateViewRegistrationInfos(regs):
         key = reg['for']
         if ifaces.has_key(key):

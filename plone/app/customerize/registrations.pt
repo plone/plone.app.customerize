@@ -27,6 +27,12 @@
     <dd>
       <tal:reg repeat="info iface/views">
         <a href=""
+           tal:condition="info/customized"
+           tal:attributes="href string:${info/customized}/manage_main;"
+           tal:content="info/viewname">
+        </a>
+        <a href=""
+           tal:condition="not: info/customized"
            tal:attributes="href string:@@customizezpt.html?for_name=${info/for}&type_name=${info/type}&view_name=${info/viewname};
                            title info/zptfile;"
            tal:content="info/viewname">
