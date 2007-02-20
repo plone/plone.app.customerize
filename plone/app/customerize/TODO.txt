@@ -1,5 +1,4 @@
 bugs:
-  - add info about registration to screen showing the template source
   - make sure the link in the registrations overview is still
     clickable after customization
   - write a browsertest doing the roundtrip

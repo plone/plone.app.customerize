@@ -14,6 +14,10 @@ class RegistrationsView(BrowserView):
         reg = self.getRegistrationFromRequest()
         return registration.getTemplateCodeFromRegistration(reg)
 
+    def getTemplateViewRegistrationInfo(self):
+        reg = self.getRegistrationFromRequest()
+        return list(registration.templateViewRegistrationInfos([reg]))[0]
+
     def getRegistrationFromRequest(self):
         form = self.context.request.form
         return registration.findTemplateViewRegistration(form['for_name'],

@@ -32,10 +32,10 @@ def templateViewRegistrations():
                factory.__name__.startswith('SimpleViewClass'):
             yield reg
 
-def templateViewRegistrationInfos():
+def templateViewRegistrationInfos(regs):
     def regkey(reg):
         return reg.name
-    for reg in sorted(templateViewRegistrations(), key=regkey):
+    for reg in sorted(regs, key=regkey):
         yield {
             'viewname': reg.name,
             'for': interfaceName(reg.required[0]),
@@ -46,7 +46,8 @@ def templateViewRegistrationInfos():
 
 def templateViewRegistrationGroups():
     ifaces = {}
-    for reg in templateViewRegistrationInfos():
+    regs = templateViewRegistrations()
+    for reg in templateViewRegistrationInfos(regs):
         key = reg['for']
         if ifaces.has_key(key):
             ifaces[key]['views'].append(reg)
