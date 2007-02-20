@@ -1,0 +1,8 @@
+bugs:
+  - make sure the link in the registrations overview is still
+    clickable after customization
+  - write a browsertest doing the roundtrip
+  - backport changes to five.customerize
+
+five.customerize:
+  - unregister with two checkboxes checked needs to be fixed
