@@ -4,6 +4,7 @@ from plone.app.customerize import docs
 from plone.app.customerize.tests import layer
 from Testing.ZopeTestCase import FunctionalDocFileSuite
 from Products.PloneTestCase import PloneTestCase
+from Products.Five.testbrowser import Browser
 from unittest import TestSuite
 from os.path import join, abspath, dirname
 from os import walk
@@ -23,6 +24,15 @@ class CustomerizeFunctionalTestCase(PloneTestCase.FunctionalTestCase):
     def afterSetUp(self):
         """ set up the tests """
         pass
+
+    def getBrowser(self, loggedIn=False):
+        """ instantiate and return a testbrowser for convenience """
+        browser = Browser()
+        if loggedIn:
+            user = PloneTestCase.default_user
+            pwd = PloneTestCase.default_password
+            browser.addHeader('Authorization', 'Basic %s:%s' % (user, pwd))
+        return browser
 
 
 def test_suite():
