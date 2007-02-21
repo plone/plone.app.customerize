@@ -5,10 +5,19 @@
   dl {
     font-family: Verdana, Helvetica, sans-serif;
     font-size: 10pt;
-    margin-left: 1em;
   }
   dt {
     font-weight: bold;
+  }
+  pre {
+    background-color: #cccccc;
+    border: 1px solid black;
+    padding: 0.5em;
+    margin: 0.5em;
+    font-size: 85%;
+  }
+  dl, pre, form {
+    margin-left: 1em;
   }
 </style>
 
@@ -31,8 +40,7 @@
       <dd tal:content="info/zcmlfile" />
   </dl>
 
-  <pre style="background-color: #cccccc; border: 1px solid black; padding: 5px;"
-       tal:content="view/getTemplateCodeFromRegistration">
+  <pre tal:content="view/getTemplateCodeFromRegistration">
     template source
   </pre>
 
