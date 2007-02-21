@@ -1,5 +1,5 @@
 bugs:
-  - write a browsertest doing the roundtrip
+  - fix the permission problem uncovered by the browsertest (#6196)
   - backport changes to five.customerize
 
 five.customerize:
