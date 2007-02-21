@@ -1,6 +1,8 @@
 from Products.Five.browser import BrowserView
 from zope.publisher.interfaces.browser import IBrowserRequest
+from zope.traversing.browser import absoluteURL
 from zope.component import getSiteManager
+from Acquisition import aq_inner
 from os.path import sep
 
 from plone.app.customerize import registration
@@ -46,7 +48,7 @@ class RegistrationsView(BrowserView):
         reg = self.getRegistrationFromRequest()
         viewzpt = registration.customizeTemplate(reg)
         self.registerTTWView(viewzpt, reg)
-        url = sep.join(viewzpt.getPhysicalPath()) + "/manage_workspace"
+        url = absoluteURL(aq_inner(viewzpt), self.request) + "/manage_workspace"
         self.request.response.redirect(url)
 
     def getLocalRegistrations(self):
