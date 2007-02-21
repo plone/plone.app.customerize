@@ -51,6 +51,16 @@ Now we look at the view we just customized.  To do so we browse the view
 registrations overview again and select another template for customization:
 
   >>> browser.getLink('portal_view_customizations').click()
+
+<debug>
+
+  >>> browser.handleErrors = False
+  >>> from AccessControl import getSecurityManager
+  >>> getSecurityManager().getUser().getRolesInContext(portal)
+  ['Manager', 'Authenticated']
+
+</debug>
+
   >>> browser.getLink('registrations.html').click()
   >>> browser.contents
   '...you loose!...'
