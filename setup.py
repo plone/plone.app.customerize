@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(name = 'plone.app.customerize',
-      version = '1.0a3',
+      version = '1.0b1',
       description = 'Integrate five.customerize into Plone.',
       keywords = 'customerize plone five views page templates zmi',
       author = 'Plone Foundation',
@@ -16,9 +16,9 @@ setup(name = 'plone.app.customerize',
       platforms = 'Any',
       zip_safe = False,
       classifiers = [
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
         'Environment :: Web Environment',
-	'Framework :: Plone',
+        'Framework :: Plone',
         'Framework :: Zope2',
         'Intended Audience :: Other Audience',
         'Intended Audience :: System Administrators',
