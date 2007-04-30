@@ -2,6 +2,8 @@ Changelog for plone.app.customerize
 
     (name of developer listed in brackets)
 
+plone.app.customerize - 1.0b2 Released April 30, 2007
+
 plone.app.customerize - 1.0b1 Released March 3, 2007
 
     - ZMI views for customizing views, refactoring & cleanups
