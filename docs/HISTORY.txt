@@ -2,6 +2,8 @@ Changelog for plone.app.customerize
 
     (name of developer listed in brackets)
 
+plone.app.customerize - 1.0b3 Released May 4, 2007
+
 plone.app.customerize - 1.0b2 Released April 30, 2007
 
 plone.app.customerize - 1.0b1 Released March 3, 2007
