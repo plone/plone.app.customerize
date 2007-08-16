@@ -2,6 +2,7 @@ from Products.Five.browser import BrowserView
 from five.customerize.interfaces import IViewTemplateContainer, ITTWViewTemplate
 from five.customerize.browser import mangleAbsoluteFilename
 from five.customerize.zpt import TTWViewTemplate
+from five.customerize.utils import findViewletTemplate
 from zope.publisher.interfaces.browser import IBrowserRequest
 from zope.component import getGlobalSiteManager, getUtility
 
@@ -10,11 +11,10 @@ def getViews(type):
     """ get all view registrations (stolen from zope.app.apidoc.presentation) """
     gsm = getGlobalSiteManager()
     for reg in gsm.registeredAdapters():
-        if (len(reg.required) > 0 and
-                reg.required[-1] is not None and
-                reg.required[-1].isOrExtends(type)):
-            for required_iface in reg.required[:-1]:
-                yield reg
+        if (len(reg.required) > 1 and
+                reg.required[1] is not None and
+                reg.required[1].isOrExtends(type)):
+            yield reg
 
 def interfaceName(iface):
     """ return a sensible name for the given interface """
@@ -28,8 +28,10 @@ def templateViewRegistrations():
             factory = factory.factory
         # TODO: this should really be dealt with using
         # a marker interface on the view factory
-        if hasattr(factory, '__name__') and \
-               factory.__name__.startswith('SimpleViewClass'):
+        name = getattr(factory, '__name__', '')
+        if name.startswith('SimpleViewClass') or \
+                name.startswith('SimpleViewletClass') or \
+                name.endswith('Viewlet'):
             yield reg
 
 def templateViewRegistrationInfos(regs):
@@ -41,13 +43,16 @@ def templateViewRegistrationInfos(regs):
             zcmlfile = None
             customized = reg.factory.getId()    # TODO: can we get an absolute url?
         else:
-            zptfile = mangleAbsoluteFilename(reg.factory.index.filename)
+            attr, pt = findViewletTemplate(reg.factory)
+            if attr is None:        # skip, if the factory has no template...
+                continue
+            zptfile = mangleAbsoluteFilename(pt.filename)
             zcmlfile = mangleAbsoluteFilename(reg.info.file)
             customized = None
         yield {
             'viewname': reg.name,
             'for': interfaceName(reg.required[0]),
-            'type': interfaceName(reg.required[1]),
+            'type': interfaceName(reg.required[-1]),
             'zptfile': zptfile,
             'zcmlfile': zcmlfile,
             'customized': customized,
@@ -66,7 +71,7 @@ def templateViewRegistrationGroups(regs):
 def findTemplateViewRegistration(for_name, type_name, viewname):
     for reg in templateViewRegistrations():
         if interfaceName(reg.required[0]) == for_name and \
-           interfaceName(reg.required[1]) == type_name and \
+           interfaceName(reg.required[-1]) == type_name and \
            reg.name == viewname:
             return reg
 
@@ -88,7 +93,7 @@ def getViewClassFromRegistration(reg):
     return base
 
 def getTemplateCodeFromRegistration(reg):
-    template = reg.factory.index
+    attr, template = findViewletTemplate(reg.factory)
     # TODO: we can't do template.read() here because of a bug in
     # Zope 3's ZPT implementation.
     return open(template.filename, 'rb').read()
