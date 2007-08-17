@@ -120,11 +120,17 @@ def getViewPermissionFromRegistration(reg):
             return permission
 
 def createTTWViewTemplate(reg):
+    attr, pt = findViewletTemplate(reg.factory)
+    if pt:
+        ptname = basename(pt.filename)
+    else:
+        ptname = None
     return TTWViewTemplate(
         id = str(generateIdFromRegistration(reg)),
         text = getTemplateCodeFromRegistration(reg),
         view = getViewClassFromRegistration(reg),
-        permission = getViewPermissionFromRegistration(reg))
+        permission = getViewPermissionFromRegistration(reg),
+        name = ptname)
 
 def customizeTemplate(reg):
     viewzpt = createTTWViewTemplate(reg)

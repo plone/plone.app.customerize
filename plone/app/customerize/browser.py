@@ -15,9 +15,9 @@ class RegistrationsView(BrowserView):
         regs = []
         local = {}
         for reg in self.getLocalRegistrations():
-            local[(reg.required[0], str(reg.name))] = reg
+            local[(reg.required, str(reg.name), str(reg.factory.name))] = reg
         for reg in registration.templateViewRegistrations():
-            lreg = local.get((reg.required[0], str(reg.name)), None)
+            lreg = local.get((reg.required, str(reg.name), str(reg.ptname)), None)
             if lreg is not None:
                 regs.append(lreg)
             else:
