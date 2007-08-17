@@ -51,7 +51,7 @@ def templateViewRegistrationInfos(regs):
         if ITTWViewTemplate.providedBy(reg.factory):
             zptfile = None
             zcmlfile = None
-            name = reg.name
+            name = reg.name or reg.factory.name
             customized = reg.factory.getId()    # TODO: can we get an absolute url?
         else:
             attr, pt = findViewletTemplate(reg.factory)
