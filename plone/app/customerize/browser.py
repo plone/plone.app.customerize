@@ -53,7 +53,7 @@ class RegistrationsView(BrowserView):
     def getLocalRegistrations(self):
         components = getSiteManager(self.context)
         for reg in components.registeredAdapters():
-            if (len(reg.required) in (2, 4) and
+            if (len(reg.required) in (2, 4, 5) and
                     reg.required[1].isOrExtends(IBrowserRequest) and
                     ITTWViewTemplate.providedBy(reg.factory)):
                 yield reg

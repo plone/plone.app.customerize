@@ -5,6 +5,8 @@ from five.customerize.zpt import TTWViewTemplate
 from five.customerize.utils import findViewletTemplate
 from zope.publisher.interfaces.browser import IBrowserRequest
 from zope.component import getGlobalSiteManager, getUtility
+from plone.portlets.interfaces import IPortletRenderer
+from os.path import basename
 
 
 def getViews(type):
@@ -31,16 +33,16 @@ def templateViewRegistrations():
         name = getattr(factory, '__name__', '')
         if name.startswith('SimpleViewClass') or \
                 name.startswith('SimpleViewletClass') or \
-                name.endswith('Viewlet'):
+                name.endswith('Viewlet') or \
+                IPortletRenderer.implementedBy(factory):
             yield reg
 
 def templateViewRegistrationInfos(regs):
-    def regkey(reg):
-        return reg.name
-    for reg in sorted(regs, key=regkey):
+    for reg in regs:
         if ITTWViewTemplate.providedBy(reg.factory):
             zptfile = None
             zcmlfile = None
+            name = reg.name
             customized = reg.factory.getId()    # TODO: can we get an absolute url?
         else:
             attr, pt = findViewletTemplate(reg.factory)
@@ -48,9 +50,10 @@ def templateViewRegistrationInfos(regs):
                 continue
             zptfile = mangleAbsoluteFilename(pt.filename)
             zcmlfile = mangleAbsoluteFilename(reg.info.file)
+            name = reg.name or basename(zptfile)
             customized = None
         yield {
-            'viewname': reg.name,
+            'viewname': name,
             'for': interfaceName(reg.required[0]),
             'type': interfaceName(reg.required[-1]),
             'zptfile': zptfile,
@@ -60,7 +63,8 @@ def templateViewRegistrationInfos(regs):
 
 def templateViewRegistrationGroups(regs):
     ifaces = {}
-    for reg in templateViewRegistrationInfos(regs):
+    comp = lambda a,b: cmp(a['viewname'], b['viewname'])
+    for reg in sorted(templateViewRegistrationInfos(regs), cmp=comp):
         key = reg['for']
         if ifaces.has_key(key):
             ifaces[key]['views'].append(reg)
@@ -71,9 +75,9 @@ def templateViewRegistrationGroups(regs):
 def findTemplateViewRegistration(for_name, type_name, viewname):
     for reg in templateViewRegistrations():
         if interfaceName(reg.required[0]) == for_name and \
-           interfaceName(reg.required[-1]) == type_name and \
-           reg.name == viewname:
-            return reg
+                interfaceName(reg.required[-1]) == type_name:
+           if reg.name == viewname or reg.provided.isOrExtends(IPortletRenderer):
+               return reg
 
 def generateIdFromRegistration(reg):
     return '%s-%s' % (
@@ -99,7 +103,7 @@ def getTemplateCodeFromRegistration(reg):
     return open(template.filename, 'rb').read()
 
 def getViewPermissionFromRegistration(reg):
-    permissions = reg.factory.__ac_permissions__
+    permissions = getattr(reg.factory, '__ac_permissions__', [])
     for permission, methods in permissions:
         if methods[0] in ('', '__call__'):
             return permission
