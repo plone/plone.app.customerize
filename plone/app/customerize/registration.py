@@ -8,6 +8,7 @@ from zope.component import getGlobalSiteManager, getUtility
 from plone.portlets.interfaces import IPortletRenderer
 from os.path import basename
 
+from plone.memoize import forever
 
 def getViews(type):
     """ get all view registrations (stolen from zope.app.apidoc.presentation) """
@@ -23,7 +24,9 @@ def interfaceName(iface):
     name = getattr(iface, '__name__', repr(iface))
     return getattr(iface, '__identifier__', name)
 
+@forever.memoize
 def templateViewRegistrations():
+    regs = []
     for reg in getViews(IBrowserRequest):
         factory = reg.factory
         while hasattr(factory, 'factory'):
@@ -35,7 +38,8 @@ def templateViewRegistrations():
                 name.startswith('SimpleViewletClass') or \
                 name.endswith('Viewlet') or \
                 IPortletRenderer.implementedBy(factory):
-            yield reg
+            regs.append(reg)
+    return regs
 
 def templateViewRegistrationInfos(regs):
     for reg in regs:
