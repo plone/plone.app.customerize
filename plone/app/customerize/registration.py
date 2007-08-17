@@ -38,6 +38,11 @@ def templateViewRegistrations():
                 name.startswith('SimpleViewletClass') or \
                 name.endswith('Viewlet') or \
                 IPortletRenderer.implementedBy(factory):
+            attr, pt = findViewletTemplate(factory)
+            if pt:
+                reg.ptname = basename(pt.filename)
+            else:
+                reg.ptname = None
             regs.append(reg)
     return regs
 
@@ -86,7 +91,7 @@ def findTemplateViewRegistration(for_name, type_name, viewname):
 def generateIdFromRegistration(reg):
     return '%s-%s' % (
         interfaceName(reg.required[0]).lower(),
-        reg.name
+        reg.name or reg.ptname
     )
 
 def getViewClassFromRegistration(reg):
