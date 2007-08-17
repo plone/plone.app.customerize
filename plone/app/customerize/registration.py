@@ -89,6 +89,19 @@ def generateIdFromRegistration(reg):
         reg.name
     )
 
+def getViewClassFromRegistration(reg):
+    # The view class is generally auto-generated, we usually want
+    # the first base class, though if the view only has one base
+    # (generally object or BrowserView) we return the full class
+    # and hope that it can be pickled
+    if IPortletRenderer.implementedBy(reg.value):
+        return reg.value        
+    klass = reg.factory
+    base = klass.__bases__[0]
+    if base is BrowserView or base is object:
+        return klass
+    return base
+
 def getTemplateCodeFromRegistration(reg):
     attr, template = findViewletTemplate(reg.factory)
     # TODO: we can't do template.read() here because of a bug in
@@ -105,7 +118,7 @@ def createTTWViewTemplate(reg):
     return TTWViewTemplate(
         id = str(generateIdFromRegistration(reg)),
         text = getTemplateCodeFromRegistration(reg),
-        view = reg.value,
+        view = getViewClassFromRegistration(reg),
         permission = getViewPermissionFromRegistration(reg))
 
 def customizeTemplate(reg):
