@@ -2,6 +2,9 @@ Changelog for plone.app.customerize
 
     (name of developer listed in brackets)
 
+plone.app.customerize - 1.0.2 Unreleased
+
+
 plone.app.customerize - 1.0.1 Released December 6, 2007
 
     - Viewlet should be picked not only by name, but also by interface.
