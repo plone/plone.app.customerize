@@ -2,6 +2,9 @@ Changelog for plone.app.customerize
 
     (name of developer listed in brackets)
 
+plone.app.customerize - 1.0.1 Unreleased
+
+
 plone.app.customerize - 1.0 Released August 17, 2007
 
     - Support for viewlets and portlets, bug fixes
