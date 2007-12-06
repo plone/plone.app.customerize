@@ -5,6 +5,7 @@ from five.customerize.zpt import TTWViewTemplate
 from five.customerize.utils import findViewletTemplate
 from zope.publisher.interfaces.browser import IBrowserRequest
 from zope.component import getGlobalSiteManager, getUtility
+from zope.viewlet.interfaces import IViewlet
 from plone.portlets.interfaces import IPortletRenderer
 from os.path import basename
 
@@ -37,6 +38,7 @@ def templateViewRegistrations():
         if name.startswith('SimpleViewClass') or \
                 name.startswith('SimpleViewletClass') or \
                 name.endswith('Viewlet') or \
+                IViewlet.implementedBy(factory) or \
                 IPortletRenderer.implementedBy(factory):
             attr, pt = findViewletTemplate(factory)
             if pt:
