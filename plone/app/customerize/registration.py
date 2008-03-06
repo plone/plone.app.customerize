@@ -60,7 +60,8 @@ def templateViewRegistrationInfos(regs):
             if attr is None:        # skip, if the factory has no template...
                 continue
             zptfile = mangleAbsoluteFilename(pt.filename)
-            zcmlfile = mangleAbsoluteFilename(reg.info.file)
+            zcmlfile = getattr(reg.info, 'file', None)
+            zcmlfile = zcmlfile and mangleAbsoluteFilename(zcmlfile)
             name = reg.name or basename(zptfile)
             customized = None
         yield {
@@ -68,7 +69,7 @@ def templateViewRegistrationInfos(regs):
             'for': interfaceName(reg.required[0]),
             'type': interfaceName(reg.required[-1]),
             'zptfile': zptfile,
-            'zcmlfile': zcmlfile,
+            'zcmlfile': zcmlfile or 'n.a.',
             'customized': customized,
         }
 
