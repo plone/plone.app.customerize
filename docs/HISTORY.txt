@@ -4,6 +4,9 @@ Changelog for plone.app.customerize
 
 plone.app.customerize - 1.0.2 Unreleased
 
+    - Fix for a seemingly rare case of missing information about the zcml file
+      a registration was made in.  See http://dev.plone.org/plone/ticket/7918
+      [witsch]
 
 plone.app.customerize - 1.0.1 Released December 6, 2007
 
