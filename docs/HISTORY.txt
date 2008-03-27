@@ -4,6 +4,9 @@ Changelog for plone.app.customerize
 
 plone.app.customerize - 1.0.3 Unreleased
 
+    - Extension for browserlayer awareness.  For more details please see
+      http://dev.plone.org/plone/ticket/7960
+      [witsch]
 
 plone.app.customerize - 1.0.2 Released March 8, 2008
 
