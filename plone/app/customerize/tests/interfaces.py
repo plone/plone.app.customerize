@@ -1,0 +1,6 @@
+from zope.interface import Interface
+
+
+class IMyLayer(Interface):
+    """ marker interface for a layer for testing purposes """
+

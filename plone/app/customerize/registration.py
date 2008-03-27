@@ -5,19 +5,23 @@ from five.customerize.zpt import TTWViewTemplate
 from five.customerize.utils import findViewletTemplate
 from zope.publisher.interfaces.browser import IBrowserRequest
 from zope.component import getGlobalSiteManager, getUtility
+from zope.component import getAllUtilitiesRegisteredFor
 from zope.viewlet.interfaces import IViewlet
 from plone.portlets.interfaces import IPortletRenderer
+from plone.browserlayer.interfaces import ILocalBrowserLayerType
 from os.path import basename
 
-from plone.memoize import forever
 
 def getViews(type):
-    """ get all view registrations (stolen from zope.app.apidoc.presentation) """
+    """ get all view registrations (stolen from zope.app.apidoc.presentation),
+        both global and those registered for a specific layer """
+    layers = getAllUtilitiesRegisteredFor(ILocalBrowserLayerType)
     gsm = getGlobalSiteManager()
     for reg in gsm.registeredAdapters():
         if (len(reg.required) > 1 and
                 reg.required[1] is not None and
-                reg.required[1].isOrExtends(type)):
+               (reg.required[1].isOrExtends(type) or
+                reg.required[1] in layers)):
             yield reg
 
 def interfaceName(iface):
@@ -25,7 +29,6 @@ def interfaceName(iface):
     name = getattr(iface, '__name__', repr(iface))
     return getattr(iface, '__identifier__', name)
 
-@forever.memoize
 def templateViewRegistrations():
     regs = []
     for reg in getViews(IBrowserRequest):
