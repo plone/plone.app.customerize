@@ -24,4 +24,17 @@
     template="local.pt"
     permission="zope.Public" />
 
+  <browser:viewlet
+    name="standard-test-viewlet"
+    for="*"
+    class=".tests.viewlets.StandardViewlet"
+    permission="zope.Public" />
+
+  <browser:viewlet
+    name="layer-test-viewlet"
+    for="*"
+    class=".tests.viewlets.LayerViewlet"
+    layer=".tests.interfaces.IMyLayer"
+    permission="zope.Public" />
+
 </configure>

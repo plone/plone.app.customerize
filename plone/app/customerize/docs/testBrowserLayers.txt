@@ -69,3 +69,59 @@ should also show up as being customizable:
    ...<a href="@@customizezpt.html?...view_name=standard-test-view"...
    ...>standard-test-view</a>...'
 
+The layer is unregistered again to clean up for the remainder of the test:
+
+  >>> from plone.browserlayer.utils import unregister_layer
+  >>> unregister_layer(name='my.product')
+  >>> IMyLayer in registered_layers()
+  False
+
+The same should be true for viewlets.  First we need to set them up via the
+GenericSetup profile provided for testing, after which the standard viewlet
+should show up on the home page:
+
+  >>> from Products.CMFCore.utils import getToolByName
+  >>> portal_setup = getToolByName(self.portal, 'portal_setup')
+  >>> _ = portal_setup.runAllImportStepsFromProfile('profile-plone.app.customerize:testing')
+
+  >>> browser.open('http://nohost/plone/')
+  >>> browser.contents
+  '...<a id="portal-logo"...
+   ...a standard view...
+   ...Sections...'
+  >>> 'a local view' in browser.contents
+  False
+
+The standard viewlet should be customizable, but not the local one:
+
+  >>> browser.open('http://nohost/plone/portal_view_customizations/registrations.html')
+  >>> browser.contents
+  '...Plone View Customizations...
+   ...The following list shows all registered...
+   ...<a href="@@customizezpt.html?...view_name=standard-test-viewlet"...
+   ...>standard-test-viewlet</a>...'
+  >>> 'layer-test-viewlet' in browser.contents
+  False
+
+Again, the layer is registered and now both viewlets should show up on the
+home page and as being customizable:
+
+  >>> register_layer(IMyLayer, name='my.product')
+  >>> IMyLayer in registered_layers()
+  True
+
+  >>> browser.open('http://nohost/plone/')
+  >>> browser.contents
+  '...<a id="portal-logo"...
+   ...a local view...a standard view...
+   ...Sections...'
+
+  >>> browser.open('http://nohost/plone/portal_view_customizations/registrations.html')
+  >>> browser.contents
+  '...Plone View Customizations...
+   ...The following list shows all registered...
+   ...<a href="@@customizezpt.html?...view_name=layer-test-viewlet"...
+   ...>layer-test-viewlet</a>...
+   ...<a href="@@customizezpt.html?...view_name=standard-test-viewlet"...
+   ...>standard-test-viewlet</a>...'
+
