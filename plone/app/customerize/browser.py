@@ -1,6 +1,7 @@
 from Products.Five.browser import BrowserView
 from zope.publisher.interfaces.browser import IBrowserRequest
-from zope.component import getSiteManager
+from zope.component import getSiteManager, getAllUtilitiesRegisteredFor
+from plone.browserlayer.interfaces import ILocalBrowserLayerType
 from Acquisition import aq_inner
 
 from plone.app.customerize import registration
@@ -51,10 +52,12 @@ class RegistrationsView(BrowserView):
         self.request.response.redirect(url)
 
     def getLocalRegistrations(self):
+        layers = getAllUtilitiesRegisteredFor(ILocalBrowserLayerType)
         components = getSiteManager(self.context)
         for reg in components.registeredAdapters():
             if (len(reg.required) in (2, 4, 5) and
-                    reg.required[1].isOrExtends(IBrowserRequest) and
+                   (reg.required[1].isOrExtends(IBrowserRequest) or
+                    reg.required[1] in layers) and
                     ITTWViewTemplate.providedBy(reg.factory)):
                 yield reg
 
