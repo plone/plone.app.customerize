@@ -1,0 +1,71 @@
+This tests customerizeability (phew :)) of views and viewlets registered for
+a specific layer using `plone.browserlayer`.  Most of the test's setup and
+actual code or text was borrowed from that package as well, but let's get
+started...
+
+In `testing.zcml` we have registered a view, "layer-test-view", available only
+for the layer `plone.app.customerize.tests.interfaces.IMyLayer`.  At first we
+have to load the correspongin zcml:
+
+  >>> from Products.Five import zcml
+  >>> from Products.Five import fiveconfigure
+  >>> fiveconfigure.debug_mode = True
+  >>> import plone.app.customerize
+  >>> zcml.load_config('tests/testing.zcml', plone.app.customerize)
+  >>> fiveconfigure.debug_mode = False
+
+Before the product is installed, we cannot view the view, though:
+
+  >>> from plone.app.customerize.tests.interfaces import IMyLayer
+  >>> from plone.browserlayer.utils import register_layer, registered_layers
+  >>> IMyLayer in registered_layers()
+  False
+
+  >>> self.setRoles(('Manager',))
+  >>> browser = self.getBrowser(loggedIn=True)
+  >>> browser.open('http://nohost/plone/@@layer-test-view')
+  Traceback (most recent call last):
+  ...
+  HTTPError: HTTP Error 404: Not Found
+
+We can view a view registered for the default layer, though:
+
+  >>> browser.open('http://nohost/plone/@@standard-test-view')
+  >>> print browser.contents
+  a standard view
+
+At this time only the latter should be customerizable:
+
+  >>> browser.open('http://nohost/plone/portal_view_customizations/registrations.html')
+  >>> browser.contents
+  '...Plone View Customizations...
+   ...The following list shows all registered...
+   ...<a href="@@customizezpt.html?...view_name=standard-test-view"...
+   ...>standard-test-view</a>...'
+  >>> 'layer-test-view' in browser.contents
+  False
+
+However, if we install the product both views should be traversable and both
+should also show up as being customizable:
+
+  >>> register_layer(IMyLayer, name='my.product')
+  >>> IMyLayer in registered_layers()
+  True
+
+  >>> browser.open('http://nohost/plone/@@layer-test-view')
+  >>> print browser.contents
+  a local view
+
+  >>> browser.open('http://nohost/plone/@@standard-test-view')
+  >>> print browser.contents
+  a standard view
+
+  >>> browser.open('http://nohost/plone/portal_view_customizations/registrations.html')
+  >>> browser.contents
+  '...Plone View Customizations...
+   ...The following list shows all registered...
+   ...<a href="@@customizezpt.html?...view_name=layer-test-view"...
+   ...>layer-test-view</a>...
+   ...<a href="@@customizezpt.html?...view_name=standard-test-view"...
+   ...>standard-test-view</a>...'
+
