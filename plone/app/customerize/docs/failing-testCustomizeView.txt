@@ -24,7 +24,7 @@ presents us with some information about and the contents of the template:
   >>> browser.url
   'http://nohost/plone/portal_view_customizations/@@customizezpt.html?...view_name=customizezpt.html...'
   >>> browser.contents
-  '...The following is the source of the...customizezpt.html...
+  '...The following is the source of...customizezpt.html...
    ...<dl>...
    ...view name...customizezpt.html...
    ...registered for interface...five.customerize.interfaces.IViewTemplateContainer...
@@ -98,7 +98,7 @@ which should give us the regular pre-customization screen again:
   >>> browser.getLink('Registrations').click()
   >>> browser.getLink('registrations.html').click()
   >>> browser.contents
-  '...The following is the source of the...registrations.html...'
+  '...The following is the source of...registrations.html...'
   >>> browser.getControl('Customize')
   <SubmitControl name='' type='submit'>
 

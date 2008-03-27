@@ -23,9 +23,9 @@
 
 <div>
 
-  <p i18n:translate="">The following is the source of the
-  "<code tal:content="request/form/view_name">viewname</code>"
-  view registered as:</p>
+  <p i18n:translate="">The following is the source of
+  "<code tal:content="request/form/view_name">viewname</code>",
+  registered as:</p>
 
   <dl tal:define="info view/getTemplateViewRegistrationInfo">
     <dt> view name </dt>
