@@ -155,3 +155,23 @@ info pages:
    ...</dl>...
    ...<pre>a local view</pre>...'
 
+As a last test to make sure the extension_ for browserlayer awareness
+doesn't have any unwanted side effects, we compare the list of registrations
+with the layer registered and not.  The set difference should come down to
+only the locally registered view and viewlet:
+
+  >>> from plone.app.customerize.registration import templateViewRegistrations
+  >>> IMyLayer in registered_layers()
+  True
+  >>> with_layer = set([ reg.name for reg in templateViewRegistrations() ])
+  >>> unregister_layer(name='my.product')
+  >>> IMyLayer in registered_layers()
+  False
+  >>> without_layer = set([ reg.name for reg in templateViewRegistrations() ])
+  >>> without_layer.issubset(with_layer)
+  True
+  >>> sorted(list(with_layer.difference(without_layer)))
+  [u'layer-test-view', u'layer-test-viewlet']
+
+  .. _extension: http://dev.plone.org/plone/changeset/20088
+
