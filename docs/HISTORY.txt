@@ -4,6 +4,8 @@ Changelog for plone.app.customerize
 
 plone.app.customerize - 1.1 Unreleased
 
+    - Fix problem with missing functions on test-layer.  See r20227.
+      [ssh42]
 
 plone.app.customerize - 1.0.3 Released March 27, 2008
 
