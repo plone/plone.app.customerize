@@ -70,7 +70,7 @@ def templateViewRegistrationInfos(regs):
         yield {
             'viewname': name,
             'for': interfaceName(reg.required[0]),
-            'type': interfaceName(reg.required[-1]),
+            'type': interfaceName(reg.required[1]),
             'zptfile': zptfile,
             'zcmlfile': zcmlfile or 'n.a.',
             'customized': customized,
@@ -90,7 +90,7 @@ def templateViewRegistrationGroups(regs):
 def findTemplateViewRegistration(for_name, type_name, viewname):
     for reg in templateViewRegistrations():
         if interfaceName(reg.required[0]) == for_name and \
-                interfaceName(reg.required[-1]) == type_name:
+                interfaceName(reg.required[1]) == type_name:
            if reg.name == viewname or reg.provided.isOrExtends(IPortletRenderer):
                return reg
 
