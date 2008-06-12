@@ -4,10 +4,10 @@ Changelog for plone.app.customerize
 
 plone.app.customerize - 1.1.1 Unreleased
 
-    - Fixed request type lookup to use the second requirement for a view registration
-      rather than the last.  This making it possible to customerize viewlet and portlet
-      templates registered with the same name for multiple z3 browser layers.  See test
-      introduced in r21154.
+    - Fixed request type lookup to use the second requirement for a view
+      registration rather than the last.  This making it possible to
+      customerize viewlet and portlet templates registered with the same
+      name for multiple z3 browser layers.  See test introduced in r21154.
       [davisagli]
 
 plone.app.customerize - 1.1 Released April 20, 2008
