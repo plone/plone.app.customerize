@@ -4,6 +4,10 @@ Changelog for plone.app.customerize
 
 plone.app.customerize - 1.1.1 Unreleased
 
+    - Re-enable browsertest introduced in r12928 after David's fix for the
+      long-standing security issue (see #6196 and #8154)
+      [witsch]
+
     - Fixed request type lookup to use the second requirement for a view
       registration rather than the last.  This making it possible to
       customerize viewlet and portlet templates registered with the same
