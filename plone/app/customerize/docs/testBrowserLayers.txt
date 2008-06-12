@@ -175,17 +175,16 @@ only the locally registered view and viewlet:
 
   .. _extension: http://dev.plone.org/plone/changeset/20088
 
-
 Let's do a test to show that if two browser layers register a viewlet with the
-same name, we can customize both of them.  First we load another zcml file which
-registers a new viewlet for a second layer, and register both layers::
+same name, we can customize both of them.  First we load another zcml file
+which registers a new viewlet for a second layer, and register both layers:
 
   >>> zcml.load_config('tests/duplicate_viewlet.zcml', plone.app.customerize)
   >>> from plone.app.customerize.tests.interfaces import IOtherLayer
   >>> register_layer(IMyLayer, name='my.product')
   >>> register_layer(IOtherLayer, name='my.otherproduct')
-  
-Now we should see two registrations with this view name::
+
+Now we should see two registrations with this view name:
 
   >>> browser.open('http://nohost/plone/portal_view_customizations/registrations.html')
   >>> browser.contents
@@ -194,9 +193,14 @@ Now we should see two registrations with this view name::
    ...<a href="@@customizezpt.html?...view_name=layer-test-viewlet"...
    ...>layer-test-viewlet</a>...
    ...<a href="@@customizezpt.html?...view_name=layer-test-viewlet"...
-   ...>standard-test-viewlet</a>...'
-   
-But they should link to different places::
+   ...>layer-test-viewlet</a>...'
 
-  >>> browser.getLink('layer-test-viewlet', index=0).url == browser.getLink('layer-test-viewlet', index=1).url
+But they should link to different places:
+
+  >>> my = browser.getLink(url='IMyLayer&view_name=layer-test-viewlet')
+  >>> other = browser.getLink(url='IOtherLayer&view_name=layer-test-viewlet')
+  >>> my.text == other.text
+  True
+  >>> my.url == other.url
   False
+
