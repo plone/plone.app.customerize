@@ -2,7 +2,7 @@ Changelog for plone.app.customerize
 
     (name of developer listed in brackets)
 
-plone.app.customerize - 1.1.2 Unreleased
+plone.app.customerize - 1.1.2 Released July 10, 2008
 
     - Fixed a deprecation warning by using reg.factory instead of reg.value.
       [davisagli]
