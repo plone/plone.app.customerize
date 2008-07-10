@@ -1,10 +1,16 @@
 from setuptools import setup, find_packages
+from os.path import join
 
-version = '1.1.2'
+name = 'plone.app.customerize'
+path = name.split('.') + ['version.txt']
+version = open(join(*path)).read().strip()
+readme = open("README.txt").read()
+history = open(join('docs', 'HISTORY.txt')).read().replace(name + ' - ', '')
 
-setup(name = 'plone.app.customerize',
+setup(name = name,
       version = version,
       description = 'Integrate five.customerize into Plone.',
+      long_description = readme[readme.find('\n\n'):] + '\n' + history,
       keywords = 'customerize plone five views page templates zmi',
       author = 'Plone Foundation',
       author_email = 'plone-developers@lists.sourceforge.net',
@@ -31,12 +37,5 @@ setup(name = 'plone.app.customerize',
         'Topic :: Software Development :: Libraries :: Python Modules',
         'Topic :: Internet :: WWW/HTTP :: Site Management',
       ],
-      long_description = """\
-        This package integrates five.customerize_ into Plone, which enables
-        site administrators to customize five/zope3-style views TTW via the
-        ZMI in a way similar to it's possible to customize filesystem-based
-        skin elements via the portal skin "customize" procedure.
-        
-          .. _five.customerize: http://svn.zope.org/five.customerize/ """,
 )
 
