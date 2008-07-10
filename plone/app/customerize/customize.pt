@@ -46,10 +46,8 @@
 
   <form action="@@customizezpt" method="post"
         enctype="multipart/form-data">
-    <input type="hidden" name="for_name" value="theviewname"
-           tal:attributes="value request/form/for_name" />
-    <input type="hidden" name="type_name" value="theviewname"
-           tal:attributes="value request/form/type_name" />
+    <input type="hidden" name="required" value=""
+           tal:attributes="value request/form/required" />
     <input type="hidden" name="view_name" value="theviewname"
            tal:attributes="value request/form/view_name" />
     <input type="submit" name="" value="Customize" />

@@ -15,6 +15,11 @@ from os.path import basename
 def getViews(type):
     """ get all view registrations (stolen from zope.app.apidoc.presentation),
         both global and those registered for a specific layer """
+        
+    # A zope 3 view is any multi-adapter whose second requirement is a browser request,
+    # or derivation thereof.  We also do an explicit check for interfaces that have
+    # been registered as plone.browserlayer browser layers, because often these
+    # do not extend IBrowserRequest even though they should.
     layers = getAllUtilitiesRegisteredFor(ILocalBrowserLayerType)
     gsm = getGlobalSiteManager()
     for reg in gsm.registeredAdapters():
@@ -67,10 +72,12 @@ def templateViewRegistrationInfos(regs):
             zcmlfile = zcmlfile and mangleAbsoluteFilename(zcmlfile)
             name = reg.name or basename(zptfile)
             customized = None
+        required = [interfaceName(r) for r in reg.required]
         yield {
             'viewname': name,
-            'for': interfaceName(reg.required[0]),
-            'type': interfaceName(reg.required[1]),
+            'required': ','.join(required),
+            'for': required[0],
+            'type': required[1],
             'zptfile': zptfile,
             'zcmlfile': zcmlfile or 'n.a.',
             'customized': customized,
@@ -87,12 +94,12 @@ def templateViewRegistrationGroups(regs):
             ifaces[key] = { 'name': key, 'views': [reg] }
     return sorted(ifaces.values(), cmp=lambda a,b: cmp(a['name'], b['name']))
 
-def findTemplateViewRegistration(for_name, type_name, viewname):
+def findTemplateViewRegistration(required, viewname):
+    required = required.split(',')
     for reg in templateViewRegistrations():
-        if interfaceName(reg.required[0]) == for_name and \
-                interfaceName(reg.required[1]) == type_name:
-           if reg.name == viewname or reg.provided.isOrExtends(IPortletRenderer):
-               return reg
+        if required == [interfaceName(r) for r in reg.required]:
+            if reg.name == viewname or reg.provided.isOrExtends(IPortletRenderer):
+                return reg
 
 def generateIdFromRegistration(reg):
     return '%s-%s' % (
@@ -105,8 +112,8 @@ def getViewClassFromRegistration(reg):
     # the first base class, though if the view only has one base
     # (generally object or BrowserView) we return the full class
     # and hope that it can be pickled
-    if IPortletRenderer.implementedBy(reg.value):
-        return reg.value        
+    if IPortletRenderer.implementedBy(reg.factory):
+        return reg.factory
     klass = reg.factory
     base = klass.__bases__[0]
     if base is BrowserView or base is object:

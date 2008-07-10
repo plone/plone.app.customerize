@@ -35,8 +35,8 @@ class RegistrationsView(BrowserView):
 
     def getRegistrationFromRequest(self):
         form = self.context.request.form
-        return registration.findTemplateViewRegistration(form['for_name'],
-            form['type_name'], form['view_name'])
+        return registration.findTemplateViewRegistration(form['required'],
+            form['view_name'])
 
     def registerTTWView(self, viewzpt, reg):
         sm = getSiteManager(self.context)

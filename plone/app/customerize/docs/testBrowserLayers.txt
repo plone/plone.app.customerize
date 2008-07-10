@@ -5,7 +5,7 @@ started...
 
 In `testing.zcml` we have registered a view, "layer-test-view", available only
 for the layer `plone.app.customerize.tests.interfaces.IMyLayer`.  At first we
-have to load the correspongin zcml:
+have to load the corresponding zcml:
 
   >>> from Products.Five import zcml
   >>> from Products.Five import fiveconfigure
@@ -126,9 +126,7 @@ home page and as being customizable:
    ...>standard-test-viewlet</a>...'
 
 We still need to make sure the local view and viewlet can actually be
-customerized.  Well, that is really customerizing things in a test doesn't
-work at the moment, but we can at least have a look at their respective
-info pages:
+customerized.  First we look at the info page for the view:
 
   >>> browser.getLink('layer-test-view').click()
   >>> browser.contents
@@ -141,8 +139,28 @@ info pages:
    ...zcml file...plone.app.customerize.tests/testing.zcml...
    ...</dl>...
    ...<pre>a local view</pre>...'
+   
+We click the "customize" button, enter some new content, and save the changes:
 
-  >>> browser.goBack()
+  >>> browser.getControl('Customize').click()
+  >>> browser.url
+  'http://nohost/plone/portal_view_customizations/zope.interface.interface-layer-test-view/pt_editForm'
+  >>> browser.getControl(name='text:text').value = 'customized view'
+  >>> browser.getControl('Save Changes').click()
+  >>> browser.url
+  'http://nohost/plone/portal_view_customizations/zope.interface.interface-layer-test-view'
+  >>> browser.contents
+  '...Saved changes...'
+
+  Now we look at the view we just customized:
+  
+  >>> browser.open('http://nohost/plone/@@layer-test-view')
+  >>> print browser.contents
+  customized view
+
+And now let's do the same with a viewlet:
+
+  >>> browser.open('http://nohost/plone/portal_view_customizations/registrations.html')
   >>> browser.getLink('layer-test-viewlet').click()
   >>> browser.contents
   '...The following is the source of...layer-test-viewlet...
@@ -154,6 +172,50 @@ info pages:
    ...zcml file...plone.app.customerize.tests/testing.zcml...
    ...</dl>...
    ...<pre>a local view</pre>...'
+   >>> browser.getControl('Customize').click()
+   >>> browser.url
+   'http://nohost/plone/portal_view_customizations/zope.interface.interface-layer-test-viewlet/pt_editForm'
+   >>> browser.getControl(name='text:text').value = 'customized viewlet'
+   >>> browser.getControl('Save Changes').click()
+   >>> browser.url
+   'http://nohost/plone/portal_view_customizations/zope.interface.interface-layer-test-viewlet'
+   >>> browser.contents
+   '...Saved changes...'
+   >>> browser.open('http://nohost/plone/@@layer-test-view')
+   >>> browser.open('http://nohost/plone/')
+   >>> browser.contents
+   '...<a id="portal-logo"...
+    ...customized viewlet...
+    ...Sections...'
+    
+Let's double-check the information for a viewlet on the default layer
+(this is to demonstrate issue #8275 which arises to do improper handling
+of portlet templates).
+
+  >>> browser.open('http://nohost/plone/portal_view_customizations/registrations.html')
+  >>> browser.getLink('standard-test-viewlet').click()
+  >>> browser.contents
+  '...The following is the source of...standard-test-viewlet...
+   ...<dl>...
+   ...view name...standard-test-viewlet...
+   ...registered for interface...zope.interface.Interface...
+   ...registered for request type...zope.publisher.interfaces.browser.IDefaultBrowserLayer...
+   ...template file...plone.app.customerize.tests/standard.pt...
+   ...zcml file...plone.app.customerize.tests/testing.zcml...
+   ...</dl>...
+   ...<pre>a standard view</pre>...'
+    
+And clean up after ourselves for the sake of later tests:
+
+  >>> browser.open('http://nohost/plone/portal_view_customizations/registrations.html')
+  >>> browser.getLink('Contents').click()
+  >>> browser.getControl(name='ids:list').getControl(value='zope.interface.interface-layer-test-view').selected = True
+  >>> browser.getControl(name='ids:list').getControl(value='zope.interface.interface-layer-test-viewlet').selected = True
+  >>> browser.getControl('Delete').click()
+  >>> browser.url
+  'http://nohost/plone/portal_view_customizations/'
+  >>> browser.contents
+  '...There are currently no items in...Manages view customizations...'
 
 As a last test to make sure the extension_ for browserlayer awareness
 doesn't have any unwanted side effects, we compare the list of registrations
@@ -197,8 +259,8 @@ Now we should see two registrations with this view name:
 
 But they should link to different places:
 
-  >>> my = browser.getLink(url='IMyLayer&view_name=layer-test-viewlet')
-  >>> other = browser.getLink(url='IOtherLayer&view_name=layer-test-viewlet')
+  >>> my = browser.getLink(url='IMyLayer,zope.publisher.interfaces.browser.IBrowserView,zope.viewlet.interfaces.IViewletManager&view_name=layer-test-viewlet')
+  >>> other = browser.getLink(url='IOtherLayer,zope.publisher.interfaces.browser.IBrowserView,zope.viewlet.interfaces.IViewletManager&view_name=layer-test-viewlet')
   >>> my.text == other.text
   True
   >>> my.url == other.url

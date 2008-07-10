@@ -1,5 +1,4 @@
 bugs:
-  - fix the permission problem uncovered by the browsertest (#6196)
   - backport changes to five.customerize
 
 improvements:
