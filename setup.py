@@ -20,7 +20,12 @@ setup(name = name,
       packages = find_packages(),
       namespace_packages = ['plone', 'plone.app'],
       include_package_data = True,
-      install_requires = ['setuptools',],
+      install_requires = [
+        'setuptools',
+        'five.customerize',
+        'plone.browserlayer',
+        'plone.portlets',
+      ],
       platforms = 'Any',
       zip_safe = False,
       classifiers = [
