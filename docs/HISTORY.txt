@@ -4,6 +4,8 @@ Changelog for plone.app.customerize
 
 plone.app.customerize - 1.1.3 Unreleased
 
+    - Fixed a test failure caused by changed HTML markup.
+      [hannosch]
 
 plone.app.customerize - 1.1.2 Released July 10, 2008
 
