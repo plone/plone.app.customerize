@@ -4,6 +4,9 @@ Changelog for plone.app.customerize
 
 plone.app.customerize - 1.1.3 Unreleased
 
+    - Specified package dependencies.
+      [hannosch]
+
     - Fixed a test failure caused by changed HTML markup.
       [hannosch]
 
