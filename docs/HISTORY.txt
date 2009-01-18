@@ -2,7 +2,7 @@ Changelog for plone.app.customerize
 
     (name of developer listed in brackets)
 
-plone.app.customerize - 1.1.3 Unreleased
+plone.app.customerize - 1.2 Unreleased
 
     - Specified package dependencies.
       [hannosch]
