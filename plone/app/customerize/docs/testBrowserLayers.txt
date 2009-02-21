@@ -88,7 +88,6 @@ should show up on the home page:
   >>> browser.contents
   '...id="portal-logo"...
    ...a standard view...
-   ...Sections...'
   >>> 'a local view' in browser.contents
   False
 
@@ -114,7 +113,6 @@ home page and as being customizable:
   >>> browser.contents
   '...id="portal-logo"...
    ...a local view...a standard view...
-   ...Sections...'
 
   >>> browser.open('http://nohost/plone/portal_view_customizations/registrations.html')
   >>> browser.contents
@@ -186,7 +184,6 @@ And now let's do the same with a viewlet:
    >>> browser.contents
    '...id="portal-logo"...
     ...customized viewlet...
-    ...Sections...'
     
 Let's double-check the information for a viewlet on the default layer
 (this is to demonstrate issue #8275 which arises to do improper handling
