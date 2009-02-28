@@ -1,14 +1,11 @@
 from setuptools import setup, find_packages
 from os.path import join
 
-name = 'plone.app.customerize'
-path = name.split('.') + ['version.txt']
-version = open(join(*path)).read().strip()
 readme = open("README.txt").read()
-history = open(join('docs', 'HISTORY.txt')).read().replace(name + ' - ', '')
+history = open(join('docs', 'HISTORY.txt')).read()
 
-setup(name = name,
-      version = version,
+setup(name = 'plone.app.customerize',
+      version = '2.0',
       description = 'Integrate five.customerize into Plone.',
       long_description = readme[readme.find('\n\n'):] + '\n' + history,
       keywords = 'customerize plone five views page templates zmi',
