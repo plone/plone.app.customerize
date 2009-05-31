@@ -45,7 +45,7 @@ class RegistrationsView(BrowserView):
 
     def customizeTemplate(self):
         reg = self.getRegistrationFromRequest()
-        viewzpt = registration.customizeTemplate(reg)
+        viewzpt = registration.customizeTemplate(reg, self.request.get('layer', None))
         self.registerTTWView(viewzpt, reg)
         path = aq_inner(viewzpt).getPhysicalPath()
         url = self.request.physicalPathToURL(path) + "/manage_workspace"

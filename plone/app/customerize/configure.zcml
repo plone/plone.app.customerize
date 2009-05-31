@@ -8,6 +8,10 @@
 
   <include file="dependencies.zcml"/>
 
+  <class class=".layerfolder.ViewFSPageTemplate">
+      
+  </class>
+
   <browser:pages
       for="five.customerize.interfaces.IViewTemplateContainer"
       class=".browser.RegistrationsView"

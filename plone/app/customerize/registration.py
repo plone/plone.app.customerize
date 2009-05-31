@@ -62,11 +62,20 @@ def templateViewRegistrationInfos(regs):
             zptfile = None
             zcmlfile = None
             name = reg.name or reg.factory.name
-            customized = reg.factory.getId()    # TODO: can we get an absolute url?
+            
+            try:
+                context = reg.registry.portal_view_customizations.aq_inner
+            except AttributeError:
+                customized = reg.factory.getId()    # TODO: can we get an absolute url?
+            else:
+                l = context[interfaceName(reg.required[1])][reg.factory.id]
+                assert l.aq_base is reg.factory
+                customized = "/".join(l.getPhysicalPath()) # We can get an absolute here...
         else:
             attr, pt = findViewletTemplate(reg.factory)
             if attr is None:        # skip, if the factory has no template...
                 continue
+            absfile = pt.filename
             zptfile = mangleAbsoluteFilename(pt.filename)
             zcmlfile = getattr(reg.info, 'file', None)
             zcmlfile = zcmlfile and mangleAbsoluteFilename(zcmlfile)
@@ -78,6 +87,9 @@ def templateViewRegistrationInfos(regs):
             'required': ','.join(required),
             'for': required[0],
             'type': required[1],
+            'foriface': reg.required[0],
+            'typeiface': reg.required[1], 
+            'abszptfile': absfile,
             'zptfile': zptfile,
             'zcmlfile': zcmlfile or 'n.a.',
             'customized': customized,
@@ -105,6 +117,12 @@ def generateIdFromRegistration(reg):
     return '%s-%s' % (
         interfaceName(reg.required[0]).lower(),
         reg.name or reg.ptname
+    )
+
+def generateIdFromInfo(info):
+    return '%s-%s' % (
+        info['for'].lower(),
+        info['viewname']
     )
 
 def getViewClassFromRegistration(reg):
@@ -145,8 +163,10 @@ def createTTWViewTemplate(reg):
         permission = getViewPermissionFromRegistration(reg),
         name = ptname)
 
-def customizeTemplate(reg):
+def customizeTemplate(reg, layer=None):
+    if layer is None:
+        layer = reg.required[1]
     viewzpt = createTTWViewTemplate(reg)
     container = getUtility(IViewTemplateContainer)
-    return container.addTemplate(viewzpt.getId(), viewzpt)
+    return container.addTemplate(viewzpt.getId(), viewzpt, layer)
 
