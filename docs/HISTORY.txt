@@ -7,8 +7,8 @@ plone.app.customerize - 1.2 Unreleased
     - Specified package dependencies.
       [hannosch]
 
-    - Fixed a test failure caused by changed HTML markup.
-      [hannosch]
+    - Fixed test failures caused by changed HTML markup.
+      [hannosch, davisagli]
 
 plone.app.customerize - 1.1.2 Released July 10, 2008
 

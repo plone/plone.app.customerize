@@ -256,8 +256,8 @@ Now we should see two registrations with this view name:
 
 But they should link to different places:
 
-  >>> my = browser.getLink(url='IMyLayer,zope.publisher.interfaces.browser.IBrowserView,zope.viewlet.interfaces.IViewletManager&view_name=layer-test-viewlet')
-  >>> other = browser.getLink(url='IOtherLayer,zope.publisher.interfaces.browser.IBrowserView,zope.viewlet.interfaces.IViewletManager&view_name=layer-test-viewlet')
+  >>> my = browser.getLink('layer-test-viewlet', index=0)
+  >>> other = browser.getLink('layer-test-viewlet', index=1)
   >>> my.text == other.text
   True
   >>> my.url == other.url
