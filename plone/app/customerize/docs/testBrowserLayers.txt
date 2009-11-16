@@ -212,7 +212,7 @@ And clean up after ourselves for the sake of later tests:
   >>> browser.url
   'http://nohost/plone/portal_view_customizations/'
   >>> browser.contents
-  '...There are currently no items in...Manages view customizations...'
+  '...There are currently no items in...'
 
 As a last test to make sure the extension_ for browserlayer awareness
 doesn't have any unwanted side effects, we compare the list of registrations

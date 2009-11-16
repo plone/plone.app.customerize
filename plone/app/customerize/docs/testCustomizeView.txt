@@ -79,7 +79,7 @@ view template object again:
   >>> browser.url
   'http://nohost/plone/portal_view_customizations/'
   >>> browser.contents
-  '...There are currently no items in...Manages view customizations...'
+  '...There are currently no items in...'
 
 The template was deleted, which should have also unregistered the local
 adapter.  We test that by once more trying to customize another template,
