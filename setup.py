@@ -1,16 +1,12 @@
 from setuptools import setup, find_packages
-from os.path import join
 
-name = 'plone.app.customerize'
-path = name.split('.') + ['version.txt']
-version = open(join(*path)).read().strip()
-readme = open("README.txt").read()
-history = open(join('docs', 'HISTORY.txt')).read().replace(name + ' - ', '')
+version = '1.2a1'
 
-setup(name = name,
+setup(name = 'plone.app.customerize',
       version = version,
       description = 'Integrate five.customerize into Plone.',
-      long_description = readme[readme.find('\n\n'):] + '\n' + history,
+      long_description = open("README.txt").read() + '\n' +
+                         open('CHANGES.txt').read(),
       keywords = 'customerize plone five views page templates zmi',
       author = 'Plone Foundation',
       author_email = 'plone-developers@lists.sourceforge.net',
@@ -36,8 +32,8 @@ setup(name = name,
         'zope.publisher',
         'zope.viewlet',
         'Products.CMFCore',
-        # 'Acquisition',
-        # 'Zope2',
+        'Acquisition',
+        'Zope2',
       ],
       platforms = 'Any',
       zip_safe = False,
@@ -46,13 +42,11 @@ setup(name = name,
         'Environment :: Web Environment',
         'Framework :: Plone',
         'Framework :: Zope2',
-        'Framework :: Zope3',
         'Intended Audience :: Other Audience',
         'Intended Audience :: System Administrators',
         'License :: OSI Approved :: GNU General Public License (GPL)',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
-        'Topic :: Software Development :: Libraries :: Python Modules',
         'Topic :: Internet :: WWW/HTTP :: Site Management',
       ],
 )

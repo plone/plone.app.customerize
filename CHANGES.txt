@@ -1,0 +1,89 @@
+Changelog
+=========
+
+1.2a1 - Unreleased
+------------------
+
+- Specified package dependencies and package metadata cleanup.
+  [hannosch]
+
+- Fixed test failures caused by changed HTML markup.
+  [hannosch, davisagli]
+
+1.1.2 - 2008-07-10
+------------------
+
+- Fixed a deprecation warning by using reg.factory instead of reg.value.
+  [davisagli]
+
+- Changed encoding of view registration requirements again, in order to
+  properly support portlet renderer templates and fix issue #8275 which
+  broke customerize in most cases.  Now *all* the requirements are used.
+  [davisagli]
+
+1.1.1 - 2008-07-07
+------------------
+
+- Re-enable browsertest introduced in r12928 after David's fix for the
+  long-standing security issue (see #6196 and #8154)
+  [witsch]
+
+- Fixed request type lookup to use the second requirement for a view
+  registration rather than the last.  This making it possible to
+  customerize viewlet and portlet templates registered with the same
+  name for multiple z3 browser layers.  See test introduced in r21154.
+  [davisagli]
+
+1.1 - 2008-04-20
+----------------
+
+- Fix problem with missing functions on test-layer.  See r20227.
+  [ssh42]
+
+1.0.3 - 2008-03-27
+------------------
+
+- Extension for browserlayer awareness.  For more details please see
+  http://dev.plone.org/plone/ticket/7960
+  [witsch]
+
+1.0.2 - 2008-03-08
+------------------
+
+- Fix for a seemingly rare case of missing information about the zcml file
+  a registration was made in.  See http://dev.plone.org/plone/ticket/7918
+  [witsch]
+
+1.0.1 - 2007-12-06
+------------------
+
+- Viewlet should be picked not only by name, but also by interface.
+  Fixes http://dev.plone.org/plone/ticket/7408
+  [witsch]
+
+1.0 - 2007-08-17
+----------------
+
+- Support for viewlets and portlets, bug fixes
+  [witsch]
+
+1.0rc1 - 2007-07-08
+-------------------
+
+1.0b3 - 2007-05-04
+------------------
+
+1.0b2 - 2007-04-30
+------------------
+
+1.0b1 - 2007-03-03
+------------------
+
+- ZMI views for customizing views, refactoring & cleanups
+  [witsch]
+  
+- Initial version
+  [witsch]
+
+- Initial package structure.
+  [witsch]
