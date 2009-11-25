@@ -4,6 +4,11 @@ Changelog
 1.2b1 - Unreleased
 ------------------
 
+- Change file format display format from
+  `plone.app.customerize.tests/local.pt` to the full, absolute path name on
+  the page detail view and tool tips. 
+  [MatthewWilkes]
+
 
 1.2a1 - 2009-11-17
 ------------------

@@ -10,7 +10,7 @@ from five.customerize.interfaces import ITTWViewTemplate
 
 class RegistrationsView(BrowserView):
 
-    def getTemplateViewRegistrations(self):
+    def getTemplateViewRegistrations(self, mangle=True):
         """ get all global view registrations and cycle through the local
             ones to see which views have already been customized ttw """
         regs = []
@@ -23,7 +23,7 @@ class RegistrationsView(BrowserView):
                 regs.append(lreg)
             else:
                 regs.append(reg)
-        return registration.templateViewRegistrationGroups(regs)  
+        return registration.templateViewRegistrationGroups(regs, mangle=mangle)  
 
     def getTemplateCodeFromRegistration(self):
         reg = self.getRegistrationFromRequest()

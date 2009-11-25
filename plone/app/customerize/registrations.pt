@@ -27,7 +27,7 @@
 </div>
 
 <dl>
-  <tal:iface repeat="iface view/getTemplateViewRegistrations">
+  <tal:iface repeat="iface python:view.getTemplateViewRegistrations(mangle=False)">
     <dt tal:content="iface/name" />
     <dd>
       <tal:reg repeat="info iface/views">
