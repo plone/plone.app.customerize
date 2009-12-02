@@ -56,7 +56,7 @@ def templateViewRegistrations():
             regs.append(reg)
     return regs
 
-def templateViewRegistrationInfos(regs):
+def templateViewRegistrationInfos(regs, mangle=True):
     for reg in regs:
         if ITTWViewTemplate.providedBy(reg.factory):
             zptfile = None
@@ -67,9 +67,13 @@ def templateViewRegistrationInfos(regs):
             attr, pt = findViewletTemplate(reg.factory)
             if attr is None:        # skip, if the factory has no template...
                 continue
-            zptfile = mangleAbsoluteFilename(pt.filename)
+            zptfile = pt.filename
             zcmlfile = getattr(reg.info, 'file', None)
-            zcmlfile = zcmlfile and mangleAbsoluteFilename(zcmlfile)
+            
+            if mangle:
+                zptfile = mangleAbsoluteFilename(zptfile)
+                zcmlfile = zcmlfile and mangleAbsoluteFilename(zcmlfile)
+            
             name = reg.name or basename(zptfile)
             customized = None
         required = [interfaceName(r) for r in reg.required]
@@ -83,10 +87,10 @@ def templateViewRegistrationInfos(regs):
             'customized': customized,
         }
 
-def templateViewRegistrationGroups(regs):
+def templateViewRegistrationGroups(regs, mangle=True):
     ifaces = {}
     comp = lambda a,b: cmp(a['viewname'], b['viewname'])
-    for reg in sorted(templateViewRegistrationInfos(regs), cmp=comp):
+    for reg in sorted(templateViewRegistrationInfos(regs, mangle=mangle), cmp=comp):
         key = reg['for']
         if ifaces.has_key(key):
             ifaces[key]['views'].append(reg)
