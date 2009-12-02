@@ -4,7 +4,6 @@ bugs:
 improvements:
   - direct link from viewlet manager
   - link/button in reg listing to delete customized versions again
-  - memoize global registrations to speed things up (memoize.ram)
   - group views/viewlets
 
 five.customerize:
