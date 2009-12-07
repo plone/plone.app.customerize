@@ -2,7 +2,7 @@ Changelog for plone.app.customerize
 
     (name of developer listed in brackets)
 
-plone.app.customerize - 1.1.3 Unreleased
+plone.app.customerize - 1.1.3 Released December 7th, 2009
 
     - Backport performance improvement for registrations page from 1.2
       [MatthewWilkes]
