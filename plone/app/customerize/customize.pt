@@ -1,27 +1,30 @@
 <h1 tal:replace="structure context/manage_page_header" />
 <h1 tal:replace="structure context/manage_tabs" />
 
-<style type="text/css">
-  dl {
-    font-family: Verdana, Helvetica, sans-serif;
-    font-size: 10pt;
-  }
-  dt {
-    font-weight: bold;
-  }
-  pre {
-    background-color: #cccccc;
-    border: 1px solid black;
-    padding: 0.5em;
-    margin: 0.5em;
-    font-size: 85%;
-  }
-  dl, pre, form {
-    margin-left: 1em;
-  }
-</style>
-
 <div>
+
+<form action="@@customizezpt" method="post"
+      enctype="multipart/form-data">
+
+  <style type="text/css">
+    dl {
+      font-family: Verdana, Helvetica, sans-serif;
+      font-size: 10pt;
+    }
+    dt {
+      font-weight: bold;
+    }
+    pre {
+      background-color: #cccccc;
+      border: 1px solid black;
+      padding: 0.5em;
+      margin: 0.5em;
+      font-size: 85%;
+    }
+    dl, pre, form {
+      margin-left: 1em;
+    }
+  </style>
 
   <p i18n:translate="">The following is the source of
   "<code tal:content="request/form/view_name">viewname</code>",
@@ -44,8 +47,6 @@
     template source
   </pre>
 
-  <form action="@@customizezpt" method="post"
-        enctype="multipart/form-data">
     <input type="hidden" name="required" value=""
            tal:attributes="value request/form/required" />
     <input type="hidden" name="view_name" value="theviewname"

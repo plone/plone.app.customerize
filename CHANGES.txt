@@ -4,6 +4,8 @@ Changelog
 1.2b2 - unreleased
 ------------------
 
+- Update markup in customize.pt to facilitate usage as a popup form.
+  [davisagli]
 
 1.2b1 - 2009-12-01
 ------------------
