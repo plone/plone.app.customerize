@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.2b2 - unreleased
+1.2b2 - 2010-06-03
 ------------------
 
 - Update markup in customize.pt to facilitate usage as a popup form.
