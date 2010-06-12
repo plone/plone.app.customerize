@@ -4,6 +4,9 @@ Changelog
 1.2b3 - Unreleased
 ------------------
 
+- Move tests into tests sub-package and avoid some magic.
+  [hannosch]
+
 1.2b2 - 2010-06-03
 ------------------
 
