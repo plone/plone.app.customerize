@@ -1,5 +1,5 @@
 This tests a roundtrip of customizing, changing and deleting a template-based
-five/zope3 view via the ZMI:
+view via the ZMI:
 
   >>> self.setRoles(('Manager',))
   >>> browser = self.getBrowser(loggedIn=True)
@@ -91,4 +91,3 @@ which should give us the regular pre-customization screen again:
   '...The following is the source of...registrations.html...'
   >>> browser.getControl('Customize')
   <SubmitControl name='' type='submit'>
-

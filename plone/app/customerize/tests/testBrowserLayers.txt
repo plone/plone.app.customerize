@@ -4,17 +4,8 @@ actual code or text was borrowed from that package as well, but let's get
 started...
 
 In `testing.zcml` we have registered a view, "layer-test-view", available only
-for the layer `plone.app.customerize.tests.interfaces.IMyLayer`.  At first we
-have to load the corresponding zcml:
-
-  >>> from Products.Five import zcml
-  >>> from Products.Five import fiveconfigure
-  >>> fiveconfigure.debug_mode = True
-  >>> import plone.app.customerize
-  >>> zcml.load_config('tests/testing.zcml', plone.app.customerize)
-  >>> fiveconfigure.debug_mode = False
-
-Before the product is installed, we cannot view the view, though:
+for the layer `plone.app.customerize.tests.interfaces.IMyLayer`. Before the
+product is installed, we cannot view the view, though:
 
   >>> from plone.app.customerize.tests.interfaces import IMyLayer
   >>> from plone.browserlayer.utils import register_layer, registered_layers
@@ -82,7 +73,7 @@ should show up on the home page:
 
   >>> from Products.CMFCore.utils import getToolByName
   >>> portal_setup = getToolByName(self.portal, 'portal_setup')
-  >>> _ = portal_setup.runAllImportStepsFromProfile('profile-plone.app.customerize:testing')
+  >>> _ = portal_setup.runAllImportStepsFromProfile('profile-plone.app.customerize.tests:testing')
 
   >>> browser.open('http://nohost/plone/')
   >>> browser.contents
@@ -137,7 +128,7 @@ customerized.  First we look at the info page for the view:
    ...zcml file...plone.app.customerize.tests/testing.zcml...
    ...</dl>...
    ...<pre>a local view</pre>...'
-   
+
 We click the "customize" button, enter some new content, and save the changes:
 
   >>> browser.getControl('Customize').click()
@@ -151,7 +142,7 @@ We click the "customize" button, enter some new content, and save the changes:
   '...Saved changes...'
 
   Now we look at the view we just customized:
-  
+
   >>> browser.open('http://nohost/plone/@@layer-test-view')
   >>> print browser.contents
   customized view
@@ -184,7 +175,7 @@ And now let's do the same with a viewlet:
    >>> browser.contents
    '...id="portal-logo"...
     ...customized viewlet...
-    
+
 Let's double-check the information for a viewlet on the default layer
 (this is to demonstrate issue #8275 which arises to do improper handling
 of portlet templates).
@@ -201,7 +192,7 @@ of portlet templates).
    ...zcml file...plone.app.customerize.tests/testing.zcml...
    ...</dl>...
    ...<pre>a standard view</pre>...'
-    
+
 And clean up after ourselves for the sake of later tests:
 
   >>> browser.open('http://nohost/plone/portal_view_customizations/registrations.html')
@@ -235,10 +226,9 @@ only the locally registered view and viewlet:
   .. _extension: http://dev.plone.org/plone/changeset/20088
 
 Let's do a test to show that if two browser layers register a viewlet with the
-same name, we can customize both of them.  First we load another zcml file
-which registers a new viewlet for a second layer, and register both layers:
+same name, we can customize both of them. We have registered a second viewlet.
+Let's register it for both layers:
 
-  >>> zcml.load_config('tests/duplicate_viewlet.zcml', plone.app.customerize)
   >>> from plone.app.customerize.tests.interfaces import IOtherLayer
   >>> register_layer(IMyLayer, name='my.product')
   >>> register_layer(IOtherLayer, name='my.otherproduct')
@@ -262,4 +252,3 @@ But they should link to different places:
   True
   >>> my.url == other.url
   False
-

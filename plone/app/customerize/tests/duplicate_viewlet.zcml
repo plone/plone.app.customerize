@@ -7,8 +7,8 @@
   <browser:viewlet
     name="layer-test-viewlet"
     for="*"
-    class=".tests.viewlets.LayerViewlet"
-    layer=".tests.interfaces.IOtherLayer"
+    class=".viewlets.LayerViewlet"
+    layer=".interfaces.IOtherLayer"
     permission="zope.Public" />
 
 </configure>

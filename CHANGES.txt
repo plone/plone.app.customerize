@@ -4,6 +4,11 @@ Changelog
 1.2b3 - Unreleased
 ------------------
 
+- Moved ZCML registrations out of functional tests into a layer. This allows
+  them to be torn-down correctly and avoids any registrations to end up in the
+  local component registry.
+  [hannosch]
+
 - Move tests into tests sub-package and avoid some magic.
   [hannosch]
 

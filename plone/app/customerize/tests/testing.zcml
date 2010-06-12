@@ -30,21 +30,21 @@
   <browser:page
     name="layer-test-view"
     for="*"
-    layer=".tests.interfaces.IMyLayer"
+    layer=".interfaces.IMyLayer"
     template="local.pt"
     permission="zope.Public" />
 
   <browser:viewlet
     name="standard-test-viewlet"
     for="*"
-    class=".tests.viewlets.StandardViewlet"
+    class=".viewlets.StandardViewlet"
     permission="zope.Public" />
 
   <browser:viewlet
     name="layer-test-viewlet"
     for="*"
-    class=".tests.viewlets.LayerViewlet"
-    layer=".tests.interfaces.IMyLayer"
+    class=".viewlets.LayerViewlet"
+    layer=".interfaces.IMyLayer"
     permission="zope.Public" />
 
 </configure>
