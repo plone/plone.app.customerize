@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.2b3 - Unreleased
+1.2b3 - 2010-06-13
 ------------------
 
 - Moved ZCML registrations out of functional tests into a layer. This allows
