@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-version = '1.2b3'
+version = '1.2b4'
 
 setup(name = 'plone.app.customerize',
       version = version,

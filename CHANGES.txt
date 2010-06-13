@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.2b4 - unreleased
+------------------
+
+
 1.2b3 - 2010-06-13
 ------------------
 
@@ -25,7 +29,6 @@ Changelog
   `plone.app.customerize.tests/local.pt` to the full, absolute path name on
   the page detail view and tool tips. 
   [MatthewWilkes]
-
 
 1.2a1 - 2009-11-17
 ------------------
