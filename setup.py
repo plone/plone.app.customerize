@@ -1,17 +1,29 @@
 from setuptools import setup, find_packages
 
-version = '1.2b4'
+version = '1.2'
 
 setup(name = 'plone.app.customerize',
       version = version,
       description = 'Integrate five.customerize into Plone.',
       long_description = open("README.txt").read() + '\n' +
                          open('CHANGES.txt').read(),
-      keywords = 'customerize plone five views page templates zmi',
-      author = 'Plone Foundation',
-      author_email = 'plone-developers@lists.sourceforge.net',
-      url = 'http://pypi.python.org/pypi/plone.app.customerize/',
-      license = 'GPL',
+      classifiers=[
+        'Development Status :: 5 - Production/Stable',
+        'Environment :: Web Environment',
+        'Framework :: Plone',
+        'Framework :: Zope2',
+        'Intended Audience :: Other Audience',
+        'Intended Audience :: System Administrators',
+        'License :: OSI Approved :: GNU General Public License (GPL)',
+        'Operating System :: OS Independent',
+        'Programming Language :: Python',
+        'Topic :: Internet :: WWW/HTTP :: Site Management',
+      ],
+      keywords='customerize plone views page templates zmi',
+      author='Plone Foundation',
+      author_email='plone-developers@lists.sourceforge.net',
+      url='http://pypi.python.org/pypi/plone.app.customerize/',
+      license='GPL version 2',
       packages = find_packages(),
       namespace_packages = ['plone', 'plone.app'],
       include_package_data = True,
@@ -37,17 +49,4 @@ setup(name = 'plone.app.customerize',
       ],
       platforms = 'Any',
       zip_safe = False,
-      classifiers = [
-        'Development Status :: 5 - Production/Stable',
-        'Environment :: Web Environment',
-        'Framework :: Plone',
-        'Framework :: Zope2',
-        'Intended Audience :: Other Audience',
-        'Intended Audience :: System Administrators',
-        'License :: OSI Approved :: GNU General Public License (GPL)',
-        'Operating System :: OS Independent',
-        'Programming Language :: Python',
-        'Topic :: Internet :: WWW/HTTP :: Site Management',
-      ],
 )
-
