@@ -77,14 +77,19 @@ def templateViewRegistrationInfos(regs, mangle=True):
             name = reg.name or basename(zptfile)
             customized = None
         required = [interfaceName(r) for r in reg.required]
+        required_str = ','.join(required)
+        customize_url = '@@customizezpt.html?required=%s&view_name=%s' % (
+                required_str,
+                name)
         yield {
             'viewname': name,
-            'required': ','.join(required),
+            'required': required_str,
             'for': required[0],
             'type': required[1],
             'zptfile': zptfile,
             'zcmlfile': zcmlfile or 'n.a.',
             'customized': customized,
+            'customize_url': customize_url,
         }
 
 def templateViewRegistrationGroups(regs, mangle=True):

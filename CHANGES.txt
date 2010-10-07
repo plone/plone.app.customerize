@@ -4,6 +4,9 @@ Changelog
 1.2.1 - unreleased
 ------------------
 
+- Fix Chameleon incompatibility
+  [swampmonkey]
+
 
 1.2 - 2010-07-18
 ----------------

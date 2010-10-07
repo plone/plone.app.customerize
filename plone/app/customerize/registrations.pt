@@ -38,7 +38,7 @@
         </a>
         <a href=""
            tal:condition="not: info/customized"
-           tal:attributes="href string:@@customizezpt.html?required=${info/required}&view_name=${info/viewname};
+           tal:attributes="href info/customize_url;
                            title info/zptfile;"
            tal:content="info/viewname">
         </a>
