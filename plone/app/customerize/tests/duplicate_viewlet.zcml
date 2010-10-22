@@ -3,7 +3,7 @@
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     i18n_domain="plone.app.customerize">
-    
+
   <browser:viewlet
     name="layer-test-viewlet"
     for="*"

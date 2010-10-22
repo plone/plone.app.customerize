@@ -23,7 +23,7 @@ class RegistrationsView(BrowserView):
                 regs.append(lreg)
             else:
                 regs.append(reg)
-        return registration.templateViewRegistrationGroups(regs, mangle=mangle)  
+        return registration.templateViewRegistrationGroups(regs, mangle=mangle)
 
     def getTemplateCodeFromRegistration(self):
         reg = self.getRegistrationFromRequest()
