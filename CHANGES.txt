@@ -1,12 +1,11 @@
 Changelog
 =========
 
-1.2.1 - unreleased
+1.2.1 - 2010-10-27
 ------------------
 
-- Fix Chameleon incompatibility
+- Fixed Chameleon incompatibility.
   [swampmonkey]
-
 
 1.2 - 2010-07-18
 ----------------
