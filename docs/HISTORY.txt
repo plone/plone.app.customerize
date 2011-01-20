@@ -4,7 +4,8 @@ Changelog for plone.app.customerize
 
 plone.app.customerize - 1.1.4 Unreleased
 
-
+- Fix #11409 by storing the customized view name for future re-use 
+[kiorky]  
 
 plone.app.customerize - 1.1.3 Released December 7th, 2009
 

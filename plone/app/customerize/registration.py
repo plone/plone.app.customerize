@@ -15,7 +15,7 @@ from os.path import basename
 def getViews(type):
     """ get all view registrations (stolen from zope.app.apidoc.presentation),
         both global and those registered for a specific layer """
-        
+
     # A zope 3 view is any multi-adapter whose second requirement is a browser request,
     # or derivation thereof.  We also do an explicit check for interfaces that have
     # been registered as plone.browserlayer browser layers, because often these
@@ -69,11 +69,11 @@ def templateViewRegistrationInfos(regs, mangle=True):
                 continue
             zptfile = pt.filename
             zcmlfile = getattr(reg.info, 'file', None)
-            
+
             if mangle:
                 zptfile = mangleAbsoluteFilename(zptfile)
                 zcmlfile = zcmlfile and mangleAbsoluteFilename(zcmlfile)
-            
+
             name = reg.name or basename(zptfile)
             customized = None
         required = [interfaceName(r) for r in reg.required]
@@ -151,6 +151,8 @@ def createTTWViewTemplate(reg):
 
 def customizeTemplate(reg):
     viewzpt = createTTWViewTemplate(reg)
+    # conserve view name (at least for KSS kssattr-viewname to work
+    viewzpt.view.name = reg.name
     container = getUtility(IViewTemplateContainer)
     return container.addTemplate(viewzpt.getId(), viewzpt)
 
