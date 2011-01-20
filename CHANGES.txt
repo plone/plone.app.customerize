@@ -10,6 +10,8 @@ Changelog
 
 - Fixed Chameleon incompatibility.
   [swampmonkey]
+- Fix #11409 by storing the customized view name for future re-use
+  [kiorky] 
 
 1.2 - 2010-07-18
 ----------------

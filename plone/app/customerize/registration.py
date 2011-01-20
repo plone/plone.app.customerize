@@ -156,6 +156,8 @@ def createTTWViewTemplate(reg):
 
 def customizeTemplate(reg):
     viewzpt = createTTWViewTemplate(reg)
+    # conserve view name (at least for KSS kssattr-viewname to work
+    viewzpt.view.name = reg.name
     container = getUtility(IViewTemplateContainer)
     return container.addTemplate(viewzpt.getId(), viewzpt)
 
