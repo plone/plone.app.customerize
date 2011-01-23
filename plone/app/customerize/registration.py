@@ -147,17 +147,18 @@ def createTTWViewTemplate(reg):
         ptname = basename(pt.filename)
     else:
         ptname = None
-    return TTWViewTemplate(
+    viewzpt = TTWViewTemplate(
         id = str(generateIdFromRegistration(reg)),
         text = getTemplateCodeFromRegistration(reg),
         view = getViewClassFromRegistration(reg),
         permission = getViewPermissionFromRegistration(reg),
         name = ptname)
+    # conserve view name (at least for KSS kssattr-viewname to work
+    viewzpt.manage_addProperty('view_name', reg.name, 'string') 
+    return viewzpt
 
 def customizeTemplate(reg):
     viewzpt = createTTWViewTemplate(reg)
-    # conserve view name (at least for KSS kssattr-viewname to work
-    viewzpt.view.name = reg.name
     container = getUtility(IViewTemplateContainer)
     return container.addTemplate(viewzpt.getId(), viewzpt)
 

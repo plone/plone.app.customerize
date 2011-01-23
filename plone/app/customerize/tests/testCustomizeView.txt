@@ -47,10 +47,11 @@ We click the "customize" button and enter some new content:
   >>> browser.contents
   '...Saved changes...'
 
-The view name is stored on the browserview replacement if some further code wants it
+The view name is stored on the template (which can be queried from the template renderer)
+This is mainly useful for code which wants the view_name anyhow.
 
-  >>> portal.restrictedTraverse('portal_view_customizations/registrations.html').name == u'customizezpt.html'
-  True
+  >>> portal.restrictedTraverse('portal_view_customizations/five.customerize.interfaces.iviewtemplatecontainer-customizezpt.html').view_name
+  'customizezpt.html'
 
 Now we look at the view we just customized.  To do so we browse the view
 registrations overview again and select another template for customization:
