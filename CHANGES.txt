@@ -4,12 +4,15 @@ Changelog
 1.2.2 - unreleased
 ------------------
 
+- Add missing security declaration on the ViewTemplateContainer.
+  [davisagli]
 
 1.2.1 - 2010-10-27
 ------------------
 
 - Fixed Chameleon incompatibility.
   [swampmonkey]
+
 - Fix #11409 by storing the customized view name for future re-use
   [kiorky] 
 
