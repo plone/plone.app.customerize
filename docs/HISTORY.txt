@@ -2,7 +2,7 @@ Changelog for plone.app.customerize
 
     (name of developer listed in brackets)
 
-plone.app.customerize - 1.1.4 Unreleased
+plone.app.customerize - 1.1.4 Released February 28th, 2011
 
     - Add missing security declaration on the ViewTemplateContainer.
       [davisagli]
