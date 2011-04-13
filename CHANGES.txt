@@ -1,14 +1,17 @@
 Changelog
 =========
 
+
 1.2.3 - Unreleased
 ------------------
+
 
 1.2.2 - 2011-02-25
 ------------------
 
 - Add missing security declaration on the ViewTemplateContainer.
   [davisagli]
+
 
 1.2.1 - 2010-10-27
 ------------------
@@ -19,11 +22,13 @@ Changelog
 - Fix #11409 by storing the customized view name for future re-use
   [kiorky] 
 
+
 1.2 - 2010-07-18
 ----------------
 
 - Update license to GPL version 2 only.
   [hannosch]
+
 
 1.2b3 - 2010-06-13
 ------------------
@@ -36,11 +41,13 @@ Changelog
 - Move tests into tests sub-package and avoid some magic.
   [hannosch]
 
+
 1.2b2 - 2010-06-03
 ------------------
 
 - Update markup in customize.pt to facilitate usage as a popup form.
   [davisagli]
+
 
 1.2b1 - 2009-12-01
 ------------------
@@ -50,6 +57,7 @@ Changelog
   the page detail view and tool tips. 
   [MatthewWilkes]
 
+
 1.2a1 - 2009-11-17
 ------------------
 
@@ -58,6 +66,7 @@ Changelog
 
 - Fixed test failures caused by changed HTML markup.
   [hannosch, davisagli]
+
 
 1.1.2 - 2008-07-10
 ------------------
@@ -69,6 +78,7 @@ Changelog
   properly support portlet renderer templates and fix issue #8275 which
   broke customerize in most cases.  Now *all* the requirements are used.
   [davisagli]
+
 
 1.1.1 - 2008-07-07
 ------------------
@@ -83,11 +93,13 @@ Changelog
   name for multiple z3 browser layers.  See test introduced in r21154.
   [davisagli]
 
+
 1.1 - 2008-04-20
 ----------------
 
 - Fix problem with missing functions on test-layer.  See r20227.
   [ssh42]
+
 
 1.0.3 - 2008-03-27
 ------------------
@@ -96,12 +108,14 @@ Changelog
   http://dev.plone.org/plone/ticket/7960
   [witsch]
 
+
 1.0.2 - 2008-03-08
 ------------------
 
 - Fix for a seemingly rare case of missing information about the zcml file
   a registration was made in.  See http://dev.plone.org/plone/ticket/7918
   [witsch]
+
 
 1.0.1 - 2007-12-06
 ------------------
@@ -110,27 +124,43 @@ Changelog
   Fixes http://dev.plone.org/plone/ticket/7408
   [witsch]
 
+
 1.0 - 2007-08-17
 ----------------
 
 - Support for viewlets and portlets, bug fixes
   [witsch]
 
+
 1.0rc1 - 2007-07-08
 -------------------
+
+- Workaround for strange bug, where `absolute_url()` wouldn't return a full url,
+  since `self.REQUEST` raised an `AttributeError`, even though `dir(self)`
+  contains `REQUEST` at the time.
+  Now `physicalPathToURL()` of the passed in request is used directly,
+  just as it should have been via `absolute_url()`.
+  [witsch]
+
 
 1.0b3 - 2007-05-04
 ------------------
 
+- No changes.
+
+
 1.0b2 - 2007-04-30
 ------------------
+
+- No changes.
+
 
 1.0b1 - 2007-03-03
 ------------------
 
 - ZMI views for customizing views, refactoring & cleanups
   [witsch]
-  
+
 - Initial version
   [witsch]
 
