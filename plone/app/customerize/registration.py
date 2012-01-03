@@ -154,7 +154,7 @@ def createTTWViewTemplate(reg):
         permission = getViewPermissionFromRegistration(reg),
         name = ptname)
     # conserve view name (at least for KSS kssattr-viewname to work
-    viewzpt.manage_addProperty('view_name', reg.name, 'string') 
+    viewzpt.manage_addProperty('view_name', reg.name, 'string')
     return viewzpt
 
 def customizeTemplate(reg):
