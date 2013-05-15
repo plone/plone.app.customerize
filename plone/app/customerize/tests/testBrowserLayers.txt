@@ -221,7 +221,7 @@ only the locally registered view and viewlet:
   >>> without_layer.issubset(with_layer)
   True
   >>> sorted(list(with_layer.difference(without_layer)))
-  [u'layer-test-view', u'layer-test-viewlet']
+  ['layer-test-view', u'layer-test-viewlet']
 
   .. _extension: http://dev.plone.org/plone/changeset/20088
 
