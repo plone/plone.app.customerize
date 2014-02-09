@@ -40,7 +40,7 @@ We click the "customize" button and enter some new content:
   >>> browser.getControl('Customize').click()
   >>> browser.url
   'http://nohost/plone/portal_view_customizations/five.customerize.interfaces.iviewtemplatecontainer-customizezpt.html/pt_editForm'
-  >>> browser.getControl(name='text:text').value = 'you loose!'
+  >>> browser.getControl(name='text:text').value = """<tal:block define="dummy python:request.response.setHeader('Content-Type', 'text/plain')" />you lose!"""
   >>> browser.getControl('Save Changes').click()
   >>> browser.url
   'http://nohost/plone/portal_view_customizations/five.customerize.interfaces.iviewtemplatecontainer-customizezpt.html'
@@ -59,7 +59,7 @@ registrations overview again and select another template for customization:
   >>> browser.getLink('portal_view_customizations').click()
   >>> browser.getLink('registrations.html').click()
   >>> browser.contents
-  '...you loose!...'
+  '...you lose!...'
 
 This is not so helpful, so we customize the template again and thereby check
 if the view registrations overview correctly links to the customized version
@@ -69,7 +69,7 @@ of the template:
   >>> browser.getLink('customizezpt.html').click()
   >>> browser.url
   'http://nohost/plone/portal_view_customizations/five.customerize.interfaces.iviewtemplatecontainer-customizezpt.html/manage_main'
-  >>> browser.getControl(name='text:text').value = 'you loose, but now you know it!'
+  >>> browser.getControl(name='text:text').value = 'you lose, but now you know it!'
   >>> browser.getControl('Save Changes').click()
   >>> browser.contents
   '...Saved changes...'

@@ -127,14 +127,14 @@ customerized.  First we look at the info page for the view:
    ...template file...plone.app.customerize.tests/local.pt...
    ...zcml file...plone.app.customerize.tests/testing.zcml...
    ...</dl>...
-   ...<pre>a local view</pre>...'
+   ...<pre>...a local view</pre>...'
 
 We click the "customize" button, enter some new content, and save the changes:
 
   >>> browser.getControl('Customize').click()
   >>> browser.url
   'http://nohost/plone/portal_view_customizations/zope.interface.interface-layer-test-view/pt_editForm'
-  >>> browser.getControl(name='text:text').value = 'customized view'
+  >>> browser.getControl(name='text:text').value = """<tal:block define="dummy python:request.response.setHeader('Content-Type', 'text/plain')" />customized view"""
   >>> browser.getControl('Save Changes').click()
   >>> browser.url
   'http://nohost/plone/portal_view_customizations/zope.interface.interface-layer-test-view'
@@ -160,7 +160,7 @@ And now let's do the same with a viewlet:
    ...template file...plone.app.customerize.tests/local.pt...
    ...zcml file...plone.app.customerize.tests/testing.zcml...
    ...</dl>...
-   ...<pre>a local view</pre>...'
+   ...<pre>...a local view</pre>...'
    >>> browser.getControl('Customize').click()
    >>> browser.url
    'http://nohost/plone/portal_view_customizations/zope.interface.interface-layer-test-viewlet/pt_editForm'
@@ -191,7 +191,7 @@ of portlet templates).
    ...template file...plone.app.customerize.tests/standard.pt...
    ...zcml file...plone.app.customerize.tests/testing.zcml...
    ...</dl>...
-   ...<pre>a standard view</pre>...'
+   ...<pre>...a standard view</pre>...'
 
 And clean up after ourselves for the sake of later tests:
 
