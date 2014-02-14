@@ -26,11 +26,11 @@
   this</span>.</p>
 </div>
 
-<dl>
-  <tal:iface repeat="iface python:view.getTemplateViewRegistrations(mangle=False)">
-    <dt tal:content="iface/name" />
-    <dd>
-      <tal:reg repeat="info iface/views">
+<div>
+  <article tal:repeat="iface python:view.getTemplateViewRegistrations(mangle=False)">
+    <header tal:content="iface/name" />
+    <ul>
+      <li tal:repeat="info iface/views">
         <a href="" class="customized"
            tal:condition="info/customized"
            tal:attributes="href string:${info/customized}/manage_main;"
@@ -43,9 +43,9 @@
            tal:content="info/viewname">
         </a>
         <span tal:content="string:(${info/type})" class="type" /> <br />
-      </tal:reg>
-    </dd>
-  </tal:iface>
-</dl>
+      </li>
+    </ul>
+  </article>
+</div>
 
 <h1 tal:replace="structure context/manage_page_footer" />
