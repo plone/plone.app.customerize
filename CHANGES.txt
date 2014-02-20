@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.2.3 - Unreleased
+1.3.0 - Unreleased
 ------------------
 
 
@@ -20,7 +20,7 @@ Changelog
   [swampmonkey]
 
 - Fix #11409 by storing the customized view name for future re-use
-  [kiorky] 
+  [kiorky]
 
 
 1.2 - 2010-07-18
@@ -54,7 +54,7 @@ Changelog
 
 - Change file format display format from
   `plone.app.customerize.tests/local.pt` to the full, absolute path name on
-  the page detail view and tool tips. 
+  the page detail view and tool tips.
   [MatthewWilkes]
 
 
