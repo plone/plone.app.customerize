@@ -5,6 +5,15 @@ Changelog
 1.3.0 - Unreleased
 ------------------
 
+- Remove DL from template.
+  [khink]
+
+- Make tests pass even with diazo.
+  [davisagli]
+
+- Upgrading test to adapt actual result on set difference.
+  [bloodbar]
+
 
 1.2.2 - 2011-02-25
 ------------------
