@@ -220,8 +220,8 @@ only the locally registered view and viewlet:
   >>> without_layer = set([ reg.name for reg in templateViewRegistrations() ])
   >>> without_layer.issubset(with_layer)
   True
-  >>> sorted(list(with_layer.difference(without_layer)))
-  ['layer-test-view', u'layer-test-viewlet']
+  >>> [unicode(v) for v in sorted(list(with_layer.difference(without_layer)))]
+  [u'layer-test-view', u'layer-test-viewlet']
 
   .. _extension: http://dev.plone.org/plone/changeset/20088
 
