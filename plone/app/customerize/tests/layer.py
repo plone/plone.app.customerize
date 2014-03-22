@@ -23,7 +23,10 @@ class PloneCustomerize(PloneSite):
         zcml.load_config('duplicate_viewlet.zcml', plone.app.customerize.tests)
         metaconfigure.debug_mode = False
         installPackage('plone.app.customerize', quiet=True)
+        from plone.protect import auto
+        auto.CSRF_DISABLED = True
 
     @classmethod
     def tearDown(cls):
-        pass
+        from plone.protect import auto
+        auto.CSRF_DISABLED = False
