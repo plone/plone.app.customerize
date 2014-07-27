@@ -1,8 +1,8 @@
 This tests a roundtrip of customizing, changing and deleting a template-based
 view via the ZMI:
 
-  >>> self.setRoles(('Manager',))
-  >>> browser = self.getBrowser(loggedIn=True)
+  >>> browser = self.site_administrator_browser
+  >>> browser.handleErrors = True
 
 First we go directly to the portal tool used to manage the view
 customizations and check the overview of all registered views:

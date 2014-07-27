@@ -30,8 +30,8 @@ setup(name = 'plone.app.customerize',
       extras_require=dict(
           test=[
             'plone.app.layout',
+            'plone.app.testing',
             'zope.testing',
-            'Products.PloneTestCase',
           ]
       ),
       install_requires = [
