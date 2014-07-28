@@ -11,13 +11,15 @@ product is installed, we cannot view the view, though:
   >>> from plone.browserlayer.utils import register_layer, registered_layers
   >>> IMyLayer in registered_layers()
   False
+  >>> import transaction
 
-  >>> self.setRoles(('Manager',))
-  >>> browser = self.getBrowser(loggedIn=True)
+  >>> browser = self.site_administrator_browser
+  >>> browser.handleErrors = False
   >>> browser.open('http://nohost/plone/@@layer-test-view')
   Traceback (most recent call last):
   ...
-  HTTPError: HTTP Error 404: Not Found
+  NotFound:   <h2>Site Error</h2>
+  ...
 
 We can view a view registered for the default layer, though:
 
@@ -42,6 +44,7 @@ should also show up as being customizable:
   >>> register_layer(IMyLayer, name='my.product')
   >>> IMyLayer in registered_layers()
   True
+  >>> transaction.commit()
 
   >>> browser.open('http://nohost/plone/@@layer-test-view')
   >>> print browser.contents
@@ -74,6 +77,7 @@ should show up on the home page:
   >>> from Products.CMFCore.utils import getToolByName
   >>> portal_setup = getToolByName(self.portal, 'portal_setup')
   >>> _ = portal_setup.runAllImportStepsFromProfile('profile-plone.app.customerize.tests:testing')
+  >>> transaction.commit()
 
   >>> browser.open('http://nohost/plone/')
   >>> browser.contents
@@ -97,6 +101,7 @@ Again, the layer is registered and now both viewlets should show up on the
 home page and as being customizable:
 
   >>> register_layer(IMyLayer, name='my.product')
+  >>> transaction.commit()
   >>> IMyLayer in registered_layers()
   True
 
@@ -131,6 +136,7 @@ customerized.  First we look at the info page for the view:
 
 We click the "customize" button, enter some new content, and save the changes:
 
+  >>> browser.handleErrors = True
   >>> browser.getControl('Customize').click()
   >>> browser.url
   'http://nohost/plone/portal_view_customizations/zope.interface.interface-layer-test-view/pt_editForm'
@@ -232,6 +238,7 @@ Let's register it for both layers:
   >>> from plone.app.customerize.tests.interfaces import IOtherLayer
   >>> register_layer(IMyLayer, name='my.product')
   >>> register_layer(IOtherLayer, name='my.otherproduct')
+  >>> transaction.commit()
 
 Now we should see two registrations with this view name:
 

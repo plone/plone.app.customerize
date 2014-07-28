@@ -1,37 +1,33 @@
 import doctest
-from unittest import TestSuite
+from unittest2 import TestCase
+from unittest2 import TestSuite
 
-from Products.PloneTestCase import PloneTestCase
 from Testing.ZopeTestCase import FunctionalDocFileSuite
 
-# BBB Zope 2.12
-try:
-    from Testing.testbrowser import Browser
-    Browser # pyflakes
-except ImportError:
-    from Products.Five.testbrowser import Browser
+from plone.testing.z2 import Browser
 
-from plone.app.customerize.tests import layer
-
-PloneTestCase.setupPloneSite()
+from plone.app.customerize.testing import \
+    PLONE_APP_CUSTOMERIZE_FUNCTIONAL_TESTING
 
 
-class CustomerizeFunctionalTestCase(PloneTestCase.FunctionalTestCase):
+class CustomerizeFunctionalTestCase(TestCase):
 
-    layer = layer.PloneCustomerize
+    layer = PLONE_APP_CUSTOMERIZE_FUNCTIONAL_TESTING
 
-    def afterSetUp(self):
-        """ set up the tests """
-        pass
+    def setUp(self):
+        self.app = self.layer['app']
+        self.portal = self.layer['portal']
+        self.app.acl_users.userFolderAddUser('app', 'secret', ['Manager'], [])
 
-    def getBrowser(self, loggedIn=False):
-        """ instantiate and return a testbrowser for convenience """
-        browser = Browser()
-        if loggedIn:
-            user = PloneTestCase.default_user
-            pwd = PloneTestCase.default_password
-            browser.addHeader('Authorization', 'Basic %s:%s' % (user, pwd))
-        return browser
+        import transaction
+        transaction.commit()
+
+        self.site_administrator_browser = Browser(self.app)
+        self.site_administrator_browser.handleErrors = False
+        self.site_administrator_browser.addHeader(
+            'Authorization',
+            'Basic %s:%s' % ('app', 'secret')
+        )
 
 
 def test_suite():
