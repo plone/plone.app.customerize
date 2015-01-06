@@ -1,8 +1,14 @@
 This tests a roundtrip of customizing, changing and deleting a template-based
 view via the ZMI:
 
-  >>> browser = self.site_administrator_browser
-  >>> browser.handleErrors = True
+  >>> import transaction
+  >>> portal = layer['portal']
+
+  >>> from plone.testing.z2 import Browser
+  >>> from plone.app.testing import SITE_OWNER_NAME, SITE_OWNER_PASSWORD
+  >>> browser = Browser(layer['app'])
+  >>> browser.addHeader('Authorization', 'Basic %s:%s' % (
+  ...     SITE_OWNER_NAME, SITE_OWNER_PASSWORD))
 
 First we go directly to the portal tool used to manage the view
 customizations and check the overview of all registered views:
