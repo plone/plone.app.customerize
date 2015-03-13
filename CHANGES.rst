@@ -5,7 +5,8 @@ Changelog
 1.3.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Move tests to plone.app.testing.
+  [bogdan.girman]
 
 
 1.3.2 (2015-05-11)
