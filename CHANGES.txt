@@ -5,6 +5,9 @@ Changelog
 1.2.3 - Unreleased
 ------------------
 
+- Various test fixes.
+  [bloodbare, davisagli, vangheem]
+
 
 1.2.2 - 2011-02-25
 ------------------
