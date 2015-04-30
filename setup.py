@@ -5,8 +5,8 @@ version = '1.2.3'
 setup(name = 'plone.app.customerize',
       version = version,
       description = 'Integrate five.customerize into Plone.',
-      long_description = open("README.txt").read() + '\n' +
-                         open('CHANGES.txt').read(),
+      long_description = open("README.rst").read() + '\n' +
+                         open('CHANGES.rst').read(),
       classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Environment :: Web Environment',
