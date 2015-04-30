@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.2.3 - Unreleased
+1.2.3 (2015-04-30)
 ------------------
 
 - Various test fixes.
