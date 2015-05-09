@@ -9,8 +9,10 @@ from plone.testing.z2 import Browser
 from plone.app.customerize.testing import \
     PLONE_APP_CUSTOMERIZE_FUNCTIONAL_TESTING
 
+from Testing.ZopeTestCase import Functional
 
-class CustomerizeFunctionalTestCase(TestCase):
+
+class CustomerizeFunctionalTestCase(TestCase, Functional):
 
     layer = PLONE_APP_CUSTOMERIZE_FUNCTIONAL_TESTING
 
