@@ -8,6 +8,10 @@ Changelog
 - Move tests to plone.app.testing.
   [bogdan.girman]
 
+- Supress a ZopeTestCase warning.
+  This fixes https://github.com/plone/Products.CMFPlone/issues/502
+  [gforcada]
+
 
 1.3.2 (2015-05-11)
 ------------------
