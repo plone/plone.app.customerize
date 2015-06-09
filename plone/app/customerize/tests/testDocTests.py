@@ -1,44 +1,34 @@
 import doctest
-from unittest2 import TestCase
-from unittest2 import TestSuite
-
-from Testing.ZopeTestCase import FunctionalDocFileSuite
-
+import unittest
+from plone.app.testing import PloneSandboxLayer
+from plone.testing import layered
 from plone.testing.z2 import Browser
 
 from plone.app.customerize.testing import \
     PLONE_APP_CUSTOMERIZE_FUNCTIONAL_TESTING
 
-from Testing.ZopeTestCase import Functional
+OPTIONFLAGS = (doctest.ELLIPSIS | doctest.NORMALIZE_WHITESPACE | doctest.REPORT_ONLY_FIRST_FAILURE)
 
 
-class CustomerizeFunctionalTestCase(TestCase, Functional):
+class CustomerizeFunctionalTestCase(PloneSandboxLayer):
 
     layer = PLONE_APP_CUSTOMERIZE_FUNCTIONAL_TESTING
 
-    def setUp(self):
-        self.app = self.layer['app']
-        self.portal = self.layer['portal']
-        self.app.acl_users.userFolderAddUser('app', 'secret', ['Manager'], [])
-
-        import transaction
-        transaction.commit()
-
-        self.site_administrator_browser = Browser(self.app)
-        self.site_administrator_browser.handleErrors = False
-        self.site_administrator_browser.addHeader(
-            'Authorization',
-            'Basic %s:%s' % ('app', 'secret')
-        )
+    def afterSetUp(self):
+        self.portal.acl_users._doAddUser('admin', 'secret', ['Manager'], [])
 
 
 def test_suite():
-    suite = TestSuite()
-    OPTIONFLAGS = (doctest.ELLIPSIS | doctest.NORMALIZE_WHITESPACE)
-    for testfile in ('testBrowserLayers.txt', 'testCustomizeView.txt'):
-        suite.addTest(FunctionalDocFileSuite(testfile,
-                                optionflags=OPTIONFLAGS,
-                                package="plone.app.customerize.tests",
-                                test_class=CustomerizeFunctionalTestCase),
-                     )
+    suite = unittest.TestSuite()
+    suite.addTests([
+        layered(
+            doctest.DocFileSuite(
+                'tests/{0}'.format(test_file),
+                package='plone.app.customerize',
+                optionflags=OPTIONFLAGS
+            ),
+            layer=PLONE_APP_CUSTOMERIZE_FUNCTIONAL_TESTING)
+        for test_file in ('testBrowserLayers.txt', 'testCustomizeView.txt')
+    ])
+
     return suite

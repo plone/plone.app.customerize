@@ -1,24 +1,23 @@
 # -*- coding: utf-8 -*-
-from plone.app.testing import FunctionalTesting
-from plone.app.testing import PloneFixture
-from zope.configuration import xmlconfig
+from plone.app.testing import PloneSandboxLayer
+from plone.app.testing.bbb import PTC_FIXTURE
+from plone.app.testing.layers import FunctionalTesting
 
 
-class PloneAppCustomerize(PloneFixture):
+class PloneAppCustomerize(PloneSandboxLayer):
+    defaultBases = (PTC_FIXTURE, )
 
-    def setUpZCML(self):
-        super(PloneAppCustomerize, self).setUpZCML()
-
+    def setUpZope(self, app, configurationContext):
         import plone.app.customerize
-        xmlconfig.file('configure.zcml',
-                       plone.app.customerize,
-                       context=self['configurationContext'])
-        xmlconfig.file('testing.zcml',
-                       plone.app.customerize.tests,
-                       context=self['configurationContext'])
-        xmlconfig.file('duplicate_viewlet.zcml',
-                       plone.app.customerize.tests,
-                       context=self['configurationContext'])
+        import five.customerize
+        self.loadZCML('configure.zcml',
+            package=plone.app.customerize)
+        self.loadZCML('testing.zcml',
+            package=plone.app.customerize.tests)
+        self.loadZCML('duplicate_viewlet.zcml',
+            package=plone.app.customerize.tests)
+        self.loadZCML('configure.zcml',
+            package=five.customerize)
 
 
 PLONE_APP_CUSTOMERIZE_FIXTURE = PloneAppCustomerize()

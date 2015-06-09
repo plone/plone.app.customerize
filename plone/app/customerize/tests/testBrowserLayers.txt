@@ -12,9 +12,16 @@ product is installed, we cannot view the view, though:
   >>> IMyLayer in registered_layers()
   False
   >>> import transaction
-
-  >>> browser = self.site_administrator_browser
+  >>> from plone.testing.z2 import Browser
+  >>> app = layer['app']
+  >>> portal = layer['portal']
+  >>> browser = Browser(app)
   >>> browser.handleErrors = False
+  >>> browser.open('http://nohost/plone/login_form')
+  >>> browser.getControl('Login Name').value = 'admin'
+  >>> browser.getControl('Password').value = 'secret'
+  >>> browser.getControl('Log in').click()
+
   >>> browser.open('http://nohost/plone/@@layer-test-view')
   Traceback (most recent call last):
   ...
@@ -75,7 +82,7 @@ GenericSetup profile provided for testing, after which the standard viewlet
 should show up on the home page:
 
   >>> from Products.CMFCore.utils import getToolByName
-  >>> portal_setup = getToolByName(self.portal, 'portal_setup')
+  >>> portal_setup = getToolByName(portal, 'portal_setup')
   >>> _ = portal_setup.runAllImportStepsFromProfile('profile-plone.app.customerize.tests:testing')
   >>> transaction.commit()
 
