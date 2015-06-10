@@ -31,7 +31,6 @@ setup(name = 'plone.app.customerize',
           test=[
             'plone.app.layout',
             'plone.app.testing',
-            'zope.testing',
           ]
       ),
       install_requires = [
