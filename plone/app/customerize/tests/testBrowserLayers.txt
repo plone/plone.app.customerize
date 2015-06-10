@@ -1,5 +1,5 @@
 This tests customerizeability (phew :)) of views and viewlets registered for
-a specific layer using `plone.browserlayer`.  Most of the test's setup and
+a specific layer using `plone.browserlayer`. Most of the test's setup and
 actual code or text was borrowed from that package as well, but let's get
 started...
 
@@ -13,8 +13,16 @@ product is installed, we cannot view the view, though:
   False
   >>> import transaction
 
-  >>> browser = self.site_administrator_browser
+First we have to set up some things and login.
+
+  >>> app = layer['app']
+  >>> from plone.testing.z2 import Browser
+  >>> browser = Browser(app)
   >>> browser.handleErrors = False
+  >>> browser.addHeader('Authorization', 'Basic admin:secret')
+  >>> portal = layer['portal']
+  >>> portal_url = 'http://nohost/plone'
+
   >>> browser.open('http://nohost/plone/@@layer-test-view')
   Traceback (most recent call last):
   ...
@@ -75,7 +83,7 @@ GenericSetup profile provided for testing, after which the standard viewlet
 should show up on the home page:
 
   >>> from Products.CMFCore.utils import getToolByName
-  >>> portal_setup = getToolByName(self.portal, 'portal_setup')
+  >>> portal_setup = getToolByName(portal, 'portal_setup')
   >>> _ = portal_setup.runAllImportStepsFromProfile('profile-plone.app.customerize.tests:testing')
   >>> transaction.commit()
 
