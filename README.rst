@@ -7,5 +7,5 @@ viewlets and portlets through the web via the ZMI in a way similar to
 overriding filesystem-based skin elements via the portal skin "customize"
 procedure.
 
-  .. _five.customerize: http://svn.zope.org/five.customerize/
+  .. _five.customerize: https://github.com/zopefoundation/five.customerize
 
