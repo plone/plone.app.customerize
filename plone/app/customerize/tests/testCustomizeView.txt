@@ -6,10 +6,7 @@ view via the ZMI:
   >>> portal = layer['portal']
   >>> browser = Browser(app)
   >>> browser.handleErrors = False
-  >>> browser.open('http://nohost/plone/login_form')
-  >>> browser.getControl('Login Name').value = 'admin'
-  >>> browser.getControl('Password').value = 'secret'
-  >>> browser.getControl('Log in').click()
+  >>> browser.addHeader('Authorization', 'Basic admin:secret')
 
 First we go directly to the portal tool used to manage the view
 customizations and check the overview of all registered views:

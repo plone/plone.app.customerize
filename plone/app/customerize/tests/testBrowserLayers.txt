@@ -17,10 +17,7 @@ product is installed, we cannot view the view, though:
   >>> portal = layer['portal']
   >>> browser = Browser(app)
   >>> browser.handleErrors = False
-  >>> browser.open('http://nohost/plone/login_form')
-  >>> browser.getControl('Login Name').value = 'admin'
-  >>> browser.getControl('Password').value = 'secret'
-  >>> browser.getControl('Log in').click()
+  >>> browser.addHeader('Authorization', 'Basic admin:secret')
 
   >>> browser.open('http://nohost/plone/@@layer-test-view')
   Traceback (most recent call last):
