@@ -1,7 +1,17 @@
 This tests a roundtrip of customizing, changing and deleting a template-based
 view via the ZMI:
 
-  >>> browser = self.site_administrator_browser
+  >>> layer['app'].acl_users.userFolderAddUser('app', 'secret', ['Manager'], [])
+
+  >>> import transaction
+  >>> transaction.commit()
+
+  >>> from plone.testing.z2 import Browser
+  >>> browser = Browser(layer['app'])
+  >>> browser.addHeader(
+  ...     'Authorization',
+  ...     'Basic %s:%s' % ('app', 'secret')
+  ... )
   >>> browser.handleErrors = True
 
 First we go directly to the portal tool used to manage the view
@@ -50,6 +60,7 @@ We click the "customize" button and enter some new content:
 The view name is stored on the template (which can be queried from the template renderer)
 This is mainly useful for code which wants the view_name anyhow.
 
+  >>> portal = layer['portal']
   >>> portal.restrictedTraverse('portal_view_customizations/five.customerize.interfaces.iviewtemplatecontainer-customizezpt.html').view_name
   'customizezpt.html'
 

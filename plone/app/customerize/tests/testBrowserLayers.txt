@@ -11,9 +11,18 @@ product is installed, we cannot view the view, though:
   >>> from plone.browserlayer.utils import register_layer, registered_layers
   >>> IMyLayer in registered_layers()
   False
-  >>> import transaction
 
-  >>> browser = self.site_administrator_browser
+  >>> layer['app'].acl_users.userFolderAddUser('app', 'secret', ['Manager'], [])
+
+  >>> import transaction
+  >>> transaction.commit()
+
+  >>> from plone.testing.z2 import Browser
+  >>> browser = Browser(layer['app'])
+  >>> browser.addHeader(
+  ...     'Authorization',
+  ...     'Basic %s:%s' % ('app', 'secret')
+  ... )
   >>> browser.handleErrors = False
   >>> browser.open('http://nohost/plone/@@layer-test-view')
   Traceback (most recent call last):
@@ -70,12 +79,13 @@ The layer is unregistered again to clean up for the remainder of the test:
   >>> IMyLayer in registered_layers()
   False
 
-The same should be true for viewlets.  First we need to set them up via the
+The same should be true for viewlets. First we need to set them up via the
 GenericSetup profile provided for testing, after which the standard viewlet
 should show up on the home page:
 
   >>> from Products.CMFCore.utils import getToolByName
-  >>> portal_setup = getToolByName(self.portal, 'portal_setup')
+  >>> portal = layer['portal']
+  >>> portal_setup = getToolByName(portal, 'portal_setup')
   >>> _ = portal_setup.runAllImportStepsFromProfile('profile-plone.app.customerize.tests:testing')
   >>> transaction.commit()
 
