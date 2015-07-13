@@ -4,6 +4,8 @@
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     i18n_domain="plone.app.customerize">
 
+  <include file="testing.zcml" />
+
   <browser:viewlet
     name="layer-test-viewlet"
     for="*"

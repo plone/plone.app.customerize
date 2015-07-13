@@ -5,6 +5,8 @@
     xmlns:plone="http://namespaces.plone.org/plone"
     i18n_domain="plone.app.customerize">
 
+  <include package="plone.app.customerize" />
+
   <genericsetup:registerProfile
     name="testing"
     title="Tests for local browser layer support"

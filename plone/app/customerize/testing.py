@@ -10,12 +10,6 @@ class PloneAppCustomerize(PloneFixture):
         super(PloneAppCustomerize, self).setUpZCML()
 
         import plone.app.customerize
-        xmlconfig.file('configure.zcml',
-                       plone.app.customerize,
-                       context=self['configurationContext'])
-        xmlconfig.file('testing.zcml',
-                       plone.app.customerize.tests,
-                       context=self['configurationContext'])
         xmlconfig.file('duplicate_viewlet.zcml',
                        plone.app.customerize.tests,
                        context=self['configurationContext'])
