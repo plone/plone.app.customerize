@@ -23,7 +23,7 @@ product is installed, we cannot view the view, though:
   >>> browser.open('http://nohost/plone/@@layer-test-view')
   Traceback (most recent call last):
   ...
-  NotFound:   <h2>Site Error</h2>
+  NotFound:...<h2>Site Error</h2>
   ...
 
 We can view a view registered for the default layer, though:
