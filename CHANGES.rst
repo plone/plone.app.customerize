@@ -11,7 +11,8 @@ New:
 
 Fixes:
 
-- *add item here*
+- Fix doctest for Zope4.
+  [pbauer]
 
 
 1.3.3 (2015-09-27)
