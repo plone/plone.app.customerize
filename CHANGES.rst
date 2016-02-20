@@ -5,10 +5,6 @@ Changelog
 1.3.4 (unreleased)
 ------------------
 
-New:
-
-- *add item here*
-
 Fixes:
 
 - Fix doctest for Zope4.
