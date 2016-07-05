@@ -1,15 +1,15 @@
 from five.customerize.interfaces import IViewTemplateContainer
-from zope.interface import implements
+from zope.interface import implementer
 from AccessControl import ClassSecurityInfo
 from App.class_init import InitializeClass
 from OFS.Folder import Folder
 from Products.CMFCore.permissions import ManagePortal
 
 
+@implementer(IViewTemplateContainer)
 class ViewTemplateContainer(Folder):
     """ a local utility storing all ttw view templates provided
         by five.customerize in a folder """
-    implements(IViewTemplateContainer)
 
     id  = 'portal_view_customizations'
     title = 'Manages view customizations'
