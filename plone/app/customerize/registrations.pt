@@ -19,11 +19,23 @@
 </style>
 
 <div>
-  <p> The following list shows all registered (template-based) views
-  sorted by interface.  Click one of the links to see the contents
-  of the view template and possibly customize it.  Views that already
+  <p>The following list shows all registered (template-based) views
+  sorted by interface. Click one of the links to see the contents
+  of the view template and possibly customize it. Views that already
   have been customized are <span class="customized">highlighted like
   this</span>.</p>
+</div>
+
+<div>
+  <p>ATTENTION: beware using this tool. Errors (e.g. <code>TypeError</code>,
+  <code>Unauthorized</code> etc) may popup if some kinds of
+  <code>python:</code> expressions are used in the template, making it
+  impossible to customize here (try z3c.jbot or regular zcml overrides
+  instead). The reason is that browser view templates are Zope 3 templates
+  while items in portal_view_customization are Zope 2 templates. The different
+  security models underlying the two implementations may break rendering of the
+  site. If that happens just delete the custom copy using the Contents tab
+  above.</p>
 </div>
 
 <div>

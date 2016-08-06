@@ -7,7 +7,8 @@ Changelog
 
 New:
 
-- *add item here*
+- Add developer warning to portal_view_customizations
+  [davilima6]
 
 Fixes:
 
