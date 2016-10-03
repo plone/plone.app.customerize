@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from Products.CMFCore.utils import ToolInit
 from plone.app.customerize.tool import ViewTemplateContainer
 

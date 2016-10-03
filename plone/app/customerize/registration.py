@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from Products.Five.browser import BrowserView
 from five.customerize.interfaces import IViewTemplateContainer, ITTWViewTemplate
 from five.customerize.browser import mangleAbsoluteFilename

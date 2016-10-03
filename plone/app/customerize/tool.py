@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from five.customerize.interfaces import IViewTemplateContainer
 from zope.interface import implementer
 from AccessControl import ClassSecurityInfo
