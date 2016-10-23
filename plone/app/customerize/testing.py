@@ -24,5 +24,5 @@ class PloneAppCustomerize(PloneFixture):
 PLONE_APP_CUSTOMERIZE_FIXTURE = PloneAppCustomerize()
 PLONE_APP_CUSTOMERIZE_FUNCTIONAL_TESTING = FunctionalTesting(
     bases=(PLONE_APP_CUSTOMERIZE_FIXTURE,),
-    name="PloneAppCustomerize:Functional",
+    name='PloneAppCustomerize:Functional',
 )
