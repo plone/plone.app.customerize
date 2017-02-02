@@ -23,8 +23,7 @@ product is installed, we cannot view the view, though:
   >>> browser.open('http://nohost/plone/@@layer-test-view')
   Traceback (most recent call last):
   ...
-  NotFound:...<h2>Site Error</h2>
-  ...
+  NotFound: ...
 
 We can view a view registered for the default layer, though:
 
@@ -208,7 +207,7 @@ And clean up after ourselves for the sake of later tests:
 
   >>> browser.open('http://nohost/plone/portal_view_customizations/registrations.html')
   >>> browser.getLink('Contents').click()
-  >>> browser.getControl(name='ids:list').getControl(value='zope.interface.interface-layer-test-view').selected = True
+  >>> browser.getControl(name='ids:list').getControl(value='zope.interface.interface-layer-test-view', index=0).selected = True
   >>> browser.getControl(name='ids:list').getControl(value='zope.interface.interface-layer-test-viewlet').selected = True
   >>> browser.getControl('Delete').click()
   >>> browser.url
