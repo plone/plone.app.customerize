@@ -15,7 +15,7 @@ New features:
 
 Bug fixes:
 
-- *add item here*
+- Fix tests on Zope 4. [davisagli]
 
 
 1.3.6 (2016-11-10)
