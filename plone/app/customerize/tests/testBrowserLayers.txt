@@ -23,12 +23,12 @@ product is installed, we cannot view the view, though:
   >>> browser.open('http://nohost/plone/@@layer-test-view')
   Traceback (most recent call last):
   ...
-  NotFound: ...
+  zExceptions.NotFound: ...
 
 We can view a view registered for the default layer, though:
 
   >>> browser.open('http://nohost/plone/@@standard-test-view')
-  >>> print browser.contents
+  >>> print(browser.contents)
   a standard view
 
 At this time only the latter should be customerizable:
@@ -51,11 +51,11 @@ should also show up as being customizable:
   >>> transaction.commit()
 
   >>> browser.open('http://nohost/plone/@@layer-test-view')
-  >>> print browser.contents
+  >>> print(browser.contents)
   a local view
 
   >>> browser.open('http://nohost/plone/@@standard-test-view')
-  >>> print browser.contents
+  >>> print(browser.contents)
   a standard view
 
   >>> browser.open('http://nohost/plone/portal_view_customizations/registrations.html')
@@ -154,7 +154,7 @@ We click the "customize" button, enter some new content, and save the changes:
   Now we look at the view we just customized:
 
   >>> browser.open('http://nohost/plone/@@layer-test-view')
-  >>> print browser.contents
+  >>> print(browser.contents)
   customized view
 
 And now let's do the same with a viewlet:
@@ -180,6 +180,7 @@ And now let's do the same with a viewlet:
    'http://nohost/plone/portal_view_customizations/zope.interface.interface-layer-test-viewlet'
    >>> browser.contents
    '...Saved changes...'
+   >>> browser.handleErrors = False
    >>> browser.open('http://nohost/plone/@@layer-test-view')
    >>> browser.open('http://nohost/plone/')
    >>> browser.contents
@@ -231,7 +232,7 @@ only the locally registered view and viewlet:
   >>> without_layer.issubset(with_layer)
   True
   >>> sorted(list(with_layer.difference(without_layer)))
-  ['layer-test-view', u'layer-test-viewlet']
+  ['layer-test-view', 'layer-test-viewlet']
 
   .. _extension: http://dev.plone.org/plone/changeset/20088
 

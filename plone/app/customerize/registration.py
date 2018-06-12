@@ -13,6 +13,7 @@ from zope.component import getGlobalSiteManager
 from zope.component import getUtility
 from zope.publisher.interfaces.browser import IBrowserRequest
 from zope.viewlet.interfaces import IViewlet
+from operator import itemgetter
 
 
 def getViews(type):
@@ -106,10 +107,9 @@ def templateViewRegistrationInfos(regs, mangle=True):
 
 def templateViewRegistrationGroups(regs, mangle=True):
     ifaces = {}
-    comp = lambda a, b: cmp(a['viewname'], b['viewname'])
     registrations = sorted(
         templateViewRegistrationInfos(regs, mangle=mangle),
-        cmp=comp
+        key=itemgetter('viewname')
     )
     for reg in registrations:
         key = reg['for']
@@ -117,7 +117,7 @@ def templateViewRegistrationGroups(regs, mangle=True):
             ifaces[key]['views'].append(reg)
         else:
             ifaces[key] = {'name': key, 'views': [reg]}
-    return sorted(ifaces.values(), cmp=lambda a, b: cmp(a['name'], b['name']))
+    return sorted(ifaces.values(), key=itemgetter('name'))
 
 
 def findTemplateViewRegistration(required, viewname):
