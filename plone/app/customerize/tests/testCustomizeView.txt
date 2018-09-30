@@ -62,8 +62,8 @@ This is mainly useful for code which wants the view_name anyhow.
 Now we look at the view we just customized.  To do so we browse the view
 registrations overview again and select another template for customization:
 
-  >>> browser.getLink('portal_view_customizations').click()
-  >>> browser.getLink('registrations.html').click()
+  >>> browser.open('http://nohost/plone/portal_view_customizations/registrations.html')
+  >>> browser.getLink('registrations.html', index=0).click()
   >>> browser.contents
   '...you lose!...'
 
