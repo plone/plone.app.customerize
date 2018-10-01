@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from AccessControl import ClassSecurityInfo
-from App.class_init import InitializeClass
+from AccessControl.class_init import InitializeClass
 from five.customerize.interfaces import IViewTemplateContainer
 from OFS.Folder import Folder
 from Products.CMFCore.permissions import ManagePortal

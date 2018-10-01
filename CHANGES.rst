@@ -15,7 +15,8 @@ New features:
 
 Bug fixes:
 
-- *add item here*
+- Fix templateViewRegistrationGroups and tests in py3.
+  [pbauer]
 
 
 1.3.7 (2017-02-05)

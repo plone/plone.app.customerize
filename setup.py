@@ -17,6 +17,7 @@ setup(
         'Framework :: Plone',
         'Framework :: Plone :: 5.0',
         'Framework :: Plone :: 5.1',
+        'Framework :: Plone :: 5.2',
         'Framework :: Zope2',
         'Intended Audience :: Other Audience',
         'Intended Audience :: System Administrators',
@@ -24,6 +25,8 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
         'Topic :: Internet :: WWW/HTTP :: Site Management',
     ],
     keywords='customerize plone views page templates zmi',
@@ -38,6 +41,7 @@ setup(
         test=[
             'plone.app.layout',
             'plone.app.testing',
+            'six',
             'zope.testing',
         ]
     ),
