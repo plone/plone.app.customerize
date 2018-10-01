@@ -32,7 +32,7 @@ setup(
     keywords='customerize plone views page templates zmi',
     author='Plone Foundation',
     author_email='plone-developers@lists.sourceforge.net',
-    url='https://pypi.python.org/pypi/plone.app.customerize/',
+    url='https://pypi.org/project/plone.app.customerize/',
     license='GPL version 2',
     packages=find_packages(),
     namespace_packages=['plone', 'plone.app'],
