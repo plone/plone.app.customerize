@@ -15,6 +15,10 @@ New features:
 
 Bug fixes:
 
+- make registrations.html look good in Bootstrap-ZMI,
+  still working fine in old ZMI.
+  [jensens]
+
 - Fix templateViewRegistrationGroups and tests in py3.
   [pbauer]
 
