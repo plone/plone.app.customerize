@@ -4,6 +4,7 @@ from five.customerize.interfaces import ITTWViewTemplate
 from five.customerize.interfaces import IViewTemplateContainer
 from five.customerize.utils import findViewletTemplate
 from five.customerize.zpt import TTWViewTemplate
+from operator import itemgetter
 from os.path import basename
 from plone.browserlayer.interfaces import ILocalBrowserLayerType
 from plone.portlets.interfaces import IPortletRenderer
@@ -13,7 +14,6 @@ from zope.component import getGlobalSiteManager
 from zope.component import getUtility
 from zope.publisher.interfaces.browser import IBrowserRequest
 from zope.viewlet.interfaces import IViewlet
-from operator import itemgetter
 
 
 def getViews(type):
