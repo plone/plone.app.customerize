@@ -19,13 +19,16 @@ class ViewTemplateContainer(Folder):
     security = ClassSecurityInfo()
 
     manage_options = (
-        dict(label='Registrations', action='registrations.html'),
-    ) + Folder.manage_options[0:1] + Folder.manage_options[2:]
+        (dict(label='Registrations', action='registrations.html'),) +
+        Folder.manage_options[0:1] +
+        Folder.manage_options[2:]
+    )
 
     @security.protected(ManagePortal)
     def addTemplate(self, id, template):
         """ add the given ttw view template to the container """
         self._setObject(id, template)
         return getattr(self, id)
+
 
 InitializeClass(ViewTemplateContainer)

@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-from plone.app.customerize.testing import PLONE_APP_CUSTOMERIZE_FUNCTIONAL_TESTING  # noqa
+from plone.app.customerize.testing import (
+    PLONE_APP_CUSTOMERIZE_FUNCTIONAL_TESTING  # noqa
+)
 from plone.testing import layered
 from unittest import TestSuite
 
@@ -18,7 +20,7 @@ class Py23DocChecker(doctest.OutputChecker):
 
 def test_suite():
     suite = TestSuite()
-    OPTIONFLAGS = (doctest.ELLIPSIS | doctest.NORMALIZE_WHITESPACE)
+    OPTIONFLAGS = doctest.ELLIPSIS | doctest.NORMALIZE_WHITESPACE
     for testfile in ('testBrowserLayers.txt', 'testCustomizeView.txt'):
         suite.addTest(
             layered(
@@ -28,7 +30,7 @@ def test_suite():
                     package='plone.app.customerize.tests',
                     checker=Py23DocChecker(),
                 ),
-                layer=PLONE_APP_CUSTOMERIZE_FUNCTIONAL_TESTING
+                layer=PLONE_APP_CUSTOMERIZE_FUNCTIONAL_TESTING,
             )
         )
     return suite
