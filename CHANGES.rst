@@ -5,14 +5,6 @@ Changelog
 1.3.8 (unreleased)
 ------------------
 
-Breaking changes:
-
-- *add item here*
-
-New features:
-
-- *add item here*
-
 Bug fixes:
 
 - make registrations.html look good in Bootstrap-ZMI,
