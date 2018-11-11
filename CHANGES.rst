@@ -15,8 +15,8 @@ New features:
 
 Bug fixes:
 
-- *add item here*
-
+- Fix a ResourceWarning: do not leave a file unclosed.
+  [gforcada]
 
 1.3.8 (2018-10-30)
 ------------------
