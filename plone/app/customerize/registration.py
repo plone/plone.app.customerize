@@ -154,7 +154,9 @@ def getTemplateCodeFromRegistration(reg):
     attr, template = findViewletTemplate(reg.factory)
     # TODO: we can't do template.read() here because of a bug in
     # Zope 3's ZPT implementation.
-    return open(template.filename, 'rb').read()
+    with open(template.filename, 'rb') as template_file:
+        content = template_file.read()
+    return content
 
 
 def getViewPermissionFromRegistration(reg):
