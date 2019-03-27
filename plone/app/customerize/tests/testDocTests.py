@@ -13,8 +13,8 @@ import six
 class Py23DocChecker(doctest.OutputChecker):
     def check_output(self, want, got, optionflags):
         if six.PY2:
-            got = re.sub('zExceptions.NotFound', 'NotFound', got)
-            got = re.sub("u'(.*?)'", "'\\1'", want)
+            got = re.sub('NotFound', 'zExceptions.NotFound', got)
+            got = re.sub("u'(.*?)'", "'\\1'", got)
         return doctest.OutputChecker.check_output(self, want, got, optionflags)
 
 
