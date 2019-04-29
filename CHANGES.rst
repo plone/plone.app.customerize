@@ -9,6 +9,14 @@ Changelog
 
 .. towncrier release notes start
 
+1.3.10 (2019-04-29)
+-------------------
+
+Bug fixes:
+
+
+- Fixed: doctests on Python 2 were not correctly checked.  [maurits] (#18)
+
 
 1.3.9 (2018-11-29)
 ------------------
