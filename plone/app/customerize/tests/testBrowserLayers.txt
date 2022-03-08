@@ -20,6 +20,10 @@ product is installed, we cannot view the view, though:
   >>> browser.handleErrors = False
   >>> browser.addHeader('Authorization', 'Basic %s:%s' % (
   ...     SITE_OWNER_NAME, SITE_OWNER_PASSWORD))
+
+First open the site root.  This avoids a crazy testing-only error with zope.component 5.
+
+  >>> browser.open('http://nohost/plone/')
   >>> browser.open('http://nohost/plone/@@layer-test-view')
   Traceback (most recent call last):
   ...
