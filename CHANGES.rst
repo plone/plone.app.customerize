@@ -9,6 +9,16 @@ Changelog
 
 .. towncrier release notes start
 
+1.3.12 (2022-03-23)
+-------------------
+
+Bug fixes:
+
+
+- Fixed tests when run with ``zope.component`` 5+.
+  [maurits] (#500)
+
+
 1.3.11 (2020-04-20)
 -------------------
 
