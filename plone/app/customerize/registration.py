@@ -16,8 +16,8 @@ from zope.viewlet.interfaces import IViewlet
 
 
 def getViews(type):
-    """ get all view registrations (stolen from zope.app.apidoc.presentation),
-        both global and those registered for a specific layer """
+    """get all view registrations (stolen from zope.app.apidoc.presentation),
+    both global and those registered for a specific layer"""
 
     # A zope 3 view is any multi-adapter whose second requirement
     # is a browser request, or derivation thereof.
@@ -28,33 +28,36 @@ def getViews(type):
     layers = getAllUtilitiesRegisteredFor(ILocalBrowserLayerType)
     gsm = getGlobalSiteManager()
     for reg in gsm.registeredAdapters():
-        if (len(reg.required) > 1 and
-                reg.required[1] is not None and
-               (reg.required[1].isOrExtends(type) or
-                reg.required[1] in layers)):
+        if (
+            len(reg.required) > 1
+            and reg.required[1] is not None
+            and (reg.required[1].isOrExtends(type) or reg.required[1] in layers)
+        ):
             yield reg
 
 
 def interfaceName(iface):
-    """ return a sensible name for the given interface """
-    name = getattr(iface, '__name__', repr(iface))
-    return getattr(iface, '__identifier__', name)
+    """return a sensible name for the given interface"""
+    name = getattr(iface, "__name__", repr(iface))
+    return getattr(iface, "__identifier__", name)
 
 
 def templateViewRegistrations():
     regs = []
     for reg in getViews(IBrowserRequest):
         factory = reg.factory
-        while hasattr(factory, 'factory'):
+        while hasattr(factory, "factory"):
             factory = factory.factory
         # TODO: this should really be dealt with using
         # a marker interface on the view factory
-        name = getattr(factory, '__name__', '')
-        if name.startswith('SimpleViewClass') or \
-                name.startswith('SimpleViewletClass') or \
-                name.endswith('Viewlet') or \
-                IViewlet.implementedBy(factory) or \
-                IPortletRenderer.implementedBy(factory):
+        name = getattr(factory, "__name__", "")
+        if (
+            name.startswith("SimpleViewClass")
+            or name.startswith("SimpleViewletClass")
+            or name.endswith("Viewlet")
+            or IViewlet.implementedBy(factory)
+            or IPortletRenderer.implementedBy(factory)
+        ):
             attr, pt = findViewletTemplate(factory)
             if pt:
                 reg.ptname = basename(pt.filename)
@@ -74,10 +77,10 @@ def templateViewRegistrationInfos(regs, mangle=True):
             customized = reg.factory.getId()
         else:
             attr, pt = findViewletTemplate(reg.factory)
-            if attr is None:        # skip, if the factory has no template...
+            if attr is None:  # skip, if the factory has no template...
                 continue
             zptfile = pt.filename
-            zcmlfile = getattr(reg.info, 'file', None)
+            zcmlfile = getattr(reg.info, "file", None)
 
             if mangle:
                 zptfile = mangleAbsoluteFilename(zptfile)
@@ -86,52 +89,49 @@ def templateViewRegistrationInfos(regs, mangle=True):
             name = reg.name or basename(zptfile)
             customized = None
         required = [interfaceName(r) for r in reg.required]
-        required_str = ','.join(required)
-        url = '@@customizezpt.html?required={0}&view_name={1}'
+        required_str = ",".join(required)
+        url = "@@customizezpt.html?required={0}&view_name={1}"
         customize_url = url.format(
             required_str,
             name,
         )
         yield {
-            'viewname': name,
-            'required': required_str,
-            'for': required[0],
-            'type': required[1],
-            'zptfile': zptfile,
-            'zcmlfile': zcmlfile or 'n.a.',
-            'customized': customized,
-            'customize_url': customize_url,
+            "viewname": name,
+            "required": required_str,
+            "for": required[0],
+            "type": required[1],
+            "zptfile": zptfile,
+            "zcmlfile": zcmlfile or "n.a.",
+            "customized": customized,
+            "customize_url": customize_url,
         }
 
 
 def templateViewRegistrationGroups(regs, mangle=True):
     ifaces = {}
     registrations = sorted(
-        templateViewRegistrationInfos(regs, mangle=mangle),
-        key=itemgetter('viewname')
+        templateViewRegistrationInfos(regs, mangle=mangle), key=itemgetter("viewname")
     )
     for reg in registrations:
-        key = reg['for']
+        key = reg["for"]
         if key in ifaces:
-            ifaces[key]['views'].append(reg)
+            ifaces[key]["views"].append(reg)
         else:
-            ifaces[key] = {'name': key, 'views': [reg]}
-    return sorted(ifaces.values(), key=itemgetter('name'))
+            ifaces[key] = {"name": key, "views": [reg]}
+    return sorted(ifaces.values(), key=itemgetter("name"))
 
 
 def findTemplateViewRegistration(required, viewname):
-    required = required.split(',')
+    required = required.split(",")
     for reg in templateViewRegistrations():
         if required == [interfaceName(r) for r in reg.required]:
-            if reg.name == viewname or \
-                    reg.provided.isOrExtends(IPortletRenderer):
+            if reg.name == viewname or reg.provided.isOrExtends(IPortletRenderer):
                 return reg
 
 
 def generateIdFromRegistration(reg):
-    return '{}-{}'.format(
-        interfaceName(reg.required[0]).lower(),
-        reg.name or reg.ptname
+    return "{}-{}".format(
+        interfaceName(reg.required[0]).lower(), reg.name or reg.ptname
     )
 
 
@@ -153,15 +153,15 @@ def getTemplateCodeFromRegistration(reg):
     attr, template = findViewletTemplate(reg.factory)
     # TODO: we can't do template.read() here because of a bug in
     # Zope 3's ZPT implementation.
-    with open(template.filename, 'rb') as template_file:
+    with open(template.filename, "rb") as template_file:
         content = template_file.read()
     return content
 
 
 def getViewPermissionFromRegistration(reg):
-    permissions = getattr(reg.factory, '__ac_permissions__', [])
+    permissions = getattr(reg.factory, "__ac_permissions__", [])
     for permission, methods in permissions:
-        if methods[0] in ('', '__call__'):
+        if methods[0] in ("", "__call__"):
             return permission
 
 
@@ -176,9 +176,10 @@ def createTTWViewTemplate(reg):
         text=getTemplateCodeFromRegistration(reg),
         view=getViewClassFromRegistration(reg),
         permission=getViewPermissionFromRegistration(reg),
-        name=ptname)
+        name=ptname,
+    )
     # conserve view name (at least for KSS kssattr-viewname to work
-    viewzpt.manage_addProperty('view_name', reg.name, 'string')
+    viewzpt.manage_addProperty("view_name", reg.name, "string")
     return viewzpt
 
 
