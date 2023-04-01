@@ -46,7 +46,6 @@ setup(
         test=[
             "plone.app.layout",
             "plone.app.testing",
-            "six",
             "zope.testing",
         ]
     ),
