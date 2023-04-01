@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import PloneFixture
 from zope.configuration import xmlconfig
@@ -7,7 +6,7 @@ from zope.configuration import xmlconfig
 class PloneAppCustomerize(PloneFixture):
 
     def setUpZCML(self):
-        super(PloneAppCustomerize, self).setUpZCML()
+        super().setUpZCML()
 
         import plone.app.customerize
         xmlconfig.file('configure.zcml',

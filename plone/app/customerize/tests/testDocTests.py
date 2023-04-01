@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from plone.app.customerize.testing import (
     PLONE_APP_CUSTOMERIZE_FUNCTIONAL_TESTING  # noqa
 )

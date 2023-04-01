@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from Acquisition import aq_inner
 from five.customerize.interfaces import ITTWViewTemplate
 from plone.app.customerize import registration

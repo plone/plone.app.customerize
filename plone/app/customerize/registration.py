@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from five.customerize.browser import mangleAbsoluteFilename
 from five.customerize.interfaces import ITTWViewTemplate
 from five.customerize.interfaces import IViewTemplateContainer
@@ -130,7 +129,7 @@ def findTemplateViewRegistration(required, viewname):
 
 
 def generateIdFromRegistration(reg):
-    return '{0}-{1}'.format(
+    return '{}-{}'.format(
         interfaceName(reg.required[0]).lower(),
         reg.name or reg.ptname
     )
