@@ -44,9 +44,10 @@ setup(
     python_requires=">=3.8",
     extras_require=dict(
         test=[
+            "Products.GenericSetup",
             "plone.app.layout",
             "plone.app.testing",
-            "zope.testing",
+            "plone.testing",
         ]
     ),
     install_requires=[
@@ -60,7 +61,6 @@ setup(
         "zope.viewlet",
         "Products.CMFCore",
         "Acquisition",
-        "Zope2",
     ],
     platforms="Any",
     zip_safe=False,
