@@ -41,6 +41,7 @@ setup(
     packages=find_packages(),
     namespace_packages=["plone", "plone.app"],
     include_package_data=True,
+    python_requires=">=3.8",
     extras_require=dict(
         test=[
             "plone.app.layout",
