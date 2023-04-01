@@ -1,8 +1,13 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <object>
-  <order manager="plone.portalheader" skinname="Plone Default">
-    <viewlet name="standard-test-viewlet" insert-after="plone.logo" />
-    <viewlet name="layer-test-viewlet" insert-after="plone.logo" />
+  <order manager="plone.portalheader"
+         skinname="Plone Default"
+  >
+    <viewlet insert-after="plone.logo"
+             name="standard-test-viewlet"
+    />
+    <viewlet insert-after="plone.logo"
+             name="layer-test-viewlet"
+    />
   </order>
 </object>
-
