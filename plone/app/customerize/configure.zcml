@@ -2,25 +2,33 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:five="http://namespaces.zope.org/five"
-    i18n_domain="plone">
+    i18n_domain="plone"
+    >
 
-  <five:registerPackage package="." initialize=".initialize" />
+  <five:registerPackage
+      package="."
+      initialize=".initialize"
+      />
 
-  <include file="dependencies.zcml"/>
+  <include file="dependencies.zcml" />
 
   <browser:pages
       for="five.customerize.interfaces.IViewTemplateContainer"
       class=".browser.RegistrationsView"
-      permission="five.ManageSite">
+      permission="five.ManageSite"
+      >
     <browser:page
         name="registrations.html"
-        template="registrations.pt" />
+        template="registrations.pt"
+        />
     <browser:page
         name="customizezpt.html"
-        template="customize.pt" />
+        template="customize.pt"
+        />
     <browser:page
         name="customizezpt"
-        attribute="customizeTemplate" />
+        attribute="customizeTemplate"
+        />
   </browser:pages>
 
 </configure>

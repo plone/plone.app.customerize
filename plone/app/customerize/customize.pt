@@ -1,12 +1,14 @@
-<h1 tal:replace="structure context/manage_page_header" />
-<h1 tal:replace="structure context/manage_tabs" />
+<h1 tal:replace="structure context/manage_page_header"></h1>
+<h1 tal:replace="structure context/manage_tabs"></h1>
 
 <div>
 
-<form action="@@customizezpt" method="post"
-      enctype="multipart/form-data">
+  <form action="@@customizezpt"
+        enctype="multipart/form-data"
+        method="post"
+  >
 
-  <style type="text/css">
+    <style type="text/css">
     dl {
       font-family: Verdana, Helvetica, sans-serif;
       font-size: 10pt;
@@ -24,36 +26,61 @@
     dl, pre, form {
       margin-left: 1em;
     }
-  </style>
+    </style>
 
-  <p i18n:translate="">The following is the source of
-  "<code tal:content="request/form/view_name">viewname</code>",
-  registered as:</p>
+    <p i18n:translate="">The following is the source of
+      "<code tal:content="request/form/view_name">viewname</code>",
+      registered as:</p>
 
-  <dl tal:define="info view/getTemplateViewRegistrationInfo">
-    <dt> view name </dt>
-      <dd tal:content="info/viewname" />
-    <dt> registered for interface </dt>
-      <dd tal:content="info/for" />
-    <dt> registered for request type </dt>
-      <dd tal:content="info/type" />
-    <dt> template file </dt>
-      <dd tal:content="info/zptfile" />
-    <dt> zcml file </dt>
-      <dd tal:content="info/zcmlfile" />
-  </dl>
+    <dl tal:define="
+          info view/getTemplateViewRegistrationInfo;
+        ">
+      <dt>
+        view name
+      </dt>
+      <dd tal:content="info/viewname"></dd>
+      <dt>
+        registered for interface
+      </dt>
+      <dd tal:content="info/for"></dd>
+      <dt>
+        registered for request type
+      </dt>
+      <dd tal:content="info/type"></dd>
+      <dt>
+        template file
+      </dt>
+      <dd tal:content="info/zptfile"></dd>
+      <dt>
+        zcml file
+      </dt>
+      <dd tal:content="info/zcmlfile"></dd>
+    </dl>
 
-  <pre tal:content="view/getTemplateCodeFromRegistration">
+    <pre tal:content="view/getTemplateCodeFromRegistration">
     template source
   </pre>
 
-    <input type="hidden" name="required" value=""
-           tal:attributes="value request/form/required" />
-    <input type="hidden" name="view_name" value="theviewname"
-           tal:attributes="value request/form/view_name" />
-    <input type="submit" name="" value="Customize" />
+    <input name="required"
+           type="hidden"
+           value=""
+           tal:attributes="
+             value request/form/required;
+           "
+    />
+    <input name="view_name"
+           type="hidden"
+           value="theviewname"
+           tal:attributes="
+             value request/form/view_name;
+           "
+    />
+    <input name=""
+           type="submit"
+           value="Customize"
+    />
   </form>
 
 </div>
 
-<h1 tal:replace="structure context/manage_page_footer" />
+<h1 tal:replace="structure context/manage_page_footer"></h1>

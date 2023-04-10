@@ -1,5 +1,5 @@
-<h1 tal:replace="structure context/manage_page_header" />
-<h1 tal:replace="structure context/manage_tabs" />
+<h1 tal:replace="structure context/manage_page_header"></h1>
+<h1 tal:replace="structure context/manage_tabs"></h1>
 
 <main class="container-fluid">
 
@@ -12,44 +12,61 @@
     }
   </style>
 
-<div class="alert alert-danger" role="alert">
+  <div class="alert alert-danger"
+       role="alert"
+  >
   ATTENTION: beware using this tool.
-  Errors (e.g. <code>TypeError</code>, <code>Unauthorized</code> etc) may popup if some kinds of
-  <code>python:</code> expressions are used in the template.
+  Errors (e.g.
+    <code>TypeError</code>,
+    <code>Unauthorized</code>
+     etc) may popup if some kinds of
+    <code>python:</code>
+     expressions are used in the template.
   This makes it impossible to customize those here (try z3c.jbot or regular zcml overrides instead).
   The reason is that browser view templates are Chameleon Pagetemplates while items in portal_view_customization are Zope 2 templates.
   The different security models underlying the two implementations may break rendering of thesite.
   If that happens just delete the custom copy using the Contents tab above.
-</div>
+  </div>
 
   <p class="form-help">
     The following list shows all registered (template-based) views
     sorted by interface. Click one of the links to see the contents
     of the view template and possibly customize it. Views that already
-    have been customized are <span class="customized">highlighted like
-    this</span>.
+    have been customized are
+    <span class="customized">highlighted like
+      this</span>.
   </p>
 
   <article tal:repeat="iface python:view.getTemplateViewRegistrations(mangle=False)">
-    <header tal:content="iface/name" />
+    <header tal:content="iface/name"></header>
     <ul>
       <li tal:repeat="info iface/views">
-        <a href="" class="customized"
+        <a class="customized"
+           href=""
            tal:condition="info/customized"
-           tal:attributes="href string:${info/customized}/manage_main;"
-           tal:content="info/viewname">
+           tal:content="info/viewname"
+           tal:attributes="
+             href string:${info/customized}/manage_main;
+           "
+        >
         </a>
         <a href=""
            tal:condition="not: info/customized"
-           tal:attributes="href info/customize_url;
-                           title info/zptfile;"
-           tal:content="info/viewname">
+           tal:content="info/viewname"
+           tal:attributes="
+             href info/customize_url;
+             title info/zptfile;
+           "
+        >
         </a>
-        <code tal:content="string:(${info/type})" class="type" /> <br />
+        <code class="type"
+              tal:content="string:(${info/type})"
+        ></code>
+        <br />
       </li>
     </ul>
   </article>
 
 </main>
 
-<h1 tal:replace="structure context/manage_page_footer" />
+<h1 tal:replace="structure context/manage_page_footer"></h1>
