@@ -35,23 +35,23 @@
     <dl tal:define="
           info view/getTemplateViewRegistrationInfo;
         ">
-      <dt>
+      <dt i18n:ignore="true">
         view name
       </dt>
       <dd tal:content="info/viewname"></dd>
-      <dt>
+      <dt i18n:ignore="true">
         registered for interface
       </dt>
       <dd tal:content="info/for"></dd>
-      <dt>
+      <dt i18n:ignore="true">
         registered for request type
       </dt>
       <dd tal:content="info/type"></dd>
-      <dt>
+      <dt i18n:ignore="true">
         template file
       </dt>
       <dd tal:content="info/zptfile"></dd>
-      <dt>
+      <dt i18n:ignore="true">
         zcml file
       </dt>
       <dd tal:content="info/zcmlfile"></dd>
@@ -78,6 +78,7 @@
     <input name=""
            type="submit"
            value="Customize"
+           i18n:attributes="value"
     />
   </form>
 

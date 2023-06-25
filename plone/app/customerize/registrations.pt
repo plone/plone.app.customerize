@@ -14,13 +14,14 @@
 
   <div class="alert alert-danger"
        role="alert"
+       i18n:ignore="true"
   >
   ATTENTION: beware using this tool.
   Errors (e.g.
-    <code>TypeError</code>,
-    <code>Unauthorized</code>
+    <code i18n:ignore="true">TypeError</code>,
+    <code i18n:ignore="true">Unauthorized</code>
      etc) may popup if some kinds of
-    <code>python:</code>
+    <code i18n:ignore="true">python:</code>
      expressions are used in the template.
   This makes it impossible to customize those here (try z3c.jbot or regular zcml overrides instead).
   The reason is that browser view templates are Chameleon Pagetemplates while items in portal_view_customization are Zope 2 templates.
@@ -28,12 +29,16 @@
   If that happens just delete the custom copy using the Contents tab above.
   </div>
 
-  <p class="form-help">
+  <p class="form-help"
+     i18n:ignore="true"
+  >
     The following list shows all registered (template-based) views
     sorted by interface. Click one of the links to see the contents
     of the view template and possibly customize it. Views that already
     have been customized are
-    <span class="customized">highlighted like
+    <span class="customized"
+          i18n:ignore="true"
+    >highlighted like
       this</span>.
   </p>
 
