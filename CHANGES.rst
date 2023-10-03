@@ -168,7 +168,7 @@ Fixes:
 - Fixed Chameleon incompatibility.
   [swampmonkey]
 
-- Fix #11409 by storing the customized view name for future re-use
+- Fix #11409 by storing the customized view name for future reuse
   [kiorky]
 
 
