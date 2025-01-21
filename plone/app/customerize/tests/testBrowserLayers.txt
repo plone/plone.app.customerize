@@ -15,7 +15,7 @@ product is installed, we cannot view the view, though:
   >>> from plone.app.testing import SITE_OWNER_NAME, SITE_OWNER_PASSWORD
   >>> portal = layer['portal']
 
-  >>> from plone.testing.z2 import Browser
+  >>> from plone.testing.zope import Browser
   >>> browser = Browser(layer['app'])
   >>> browser.handleErrors = False
   >>> browser.addHeader('Authorization', 'Basic %s:%s' % (
