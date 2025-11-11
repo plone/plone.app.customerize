@@ -48,7 +48,6 @@ setup(
         ]
     ),
     install_requires=[
-        "setuptools",
         "five.customerize",
         "plone.browserlayer",
         "plone.portlets",
